@@ -12,14 +12,12 @@ try {
     echo "error: ".$e->getMessage();
 }
 
-
-
 ?>
 
 
-
+ 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
     if (document.getElementById("indexAjax") == null) {
         window.open("../index.php","_self")
     }
-</script>
+</script> 

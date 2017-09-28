@@ -35,18 +35,10 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
  
 <?php
        break;
-       case $_SESSION['role'] == 'dosen' : ?>
+       case $_SESSION['role'] == 'user' : ?>
 
          <script>
-            $("#indexAjax").load("_views/role_02_dosen/home_dosen.php");
-        </script>   
- 
-<?php
-       break;
-       case $_SESSION['role'] == 'siswa' : ?>
-
-         <script>
-            $("#indexAjax").load("_views/role_03_siswa/home_siswa.php");
+            $("#indexAjax").load("_views/role_02_user/home_user.php");
         </script>   
  
 <?php

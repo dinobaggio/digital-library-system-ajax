@@ -28,7 +28,7 @@ $(document).ready(function(){
 });
 </script>
 
-<h2>Dosen masih dalam pembuatan</h2><br/>
+<h2>User masih dalam pembuatan</h2><br/>
 <button id="logout" >Logout</button>
 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
