@@ -6,7 +6,6 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['role']) ) { ?>
 
 <script>
 $("indexAjax").load('_views/login/login.php');
-
 </script>
 
 <?php
