@@ -30,3 +30,11 @@ if(isset($_GET["id"])) {
 // http://www.php-mysql-tutorial.com/wikis/mysql-tutorials/uploading-files-to-mysql-database.aspx
 
 ?>
+
+
+
+<script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
+    if (document.getElementById("indexAjax") == null) {
+        window.open("../../index.php","_self");
+    }
+</script>

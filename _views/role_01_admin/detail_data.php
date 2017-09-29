@@ -1,3 +1,4 @@
+<script src="_asset/js/public.js"></script>
 <?php
 
 if(isset($_POST['id'])) {
@@ -26,9 +27,9 @@ if(isset($_POST['id'])) {
         $("#lihatPdf").toggle('slow');
     });
 
-    /* $("#download").click(function(){
-        window.open("download_pdf.php?id=<?php echo $data['id_upload'];?>", "_self");
-    }); */
+     $("#download").click(function(){
+        window.open("download_pdf.php?id=<?php echo $id_upload;?>", "_self");
+    }); 
 
     </script><br/>
      <p id="lihatPdf" style="display:none"></p> 
@@ -50,3 +51,11 @@ if(isset($_POST['id'])) {
 }
 
 ?>
+
+
+
+<script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
+    if (document.getElementById("indexAjax") == null) {
+        window.open("../../index.php","_self");
+    }
+</script>

@@ -47,6 +47,7 @@ unset($loadController);
         <tr><td>Tahun Penerbit: </td><td><input type="text" name="tahun_penerbit" value="" placeholder="Tahun Penerbit ..." /></td></tr>
         <tr><td>Tempat Penerbit: </td><td><input type="text" name="tempat_penerbit" value="" placeholder="Tempat Penerbit ..." /></td></tr>
         <tr><td>Info Detail Spesifik: </td><td><textarea name="info_detail" placeholder"Info dan Detail ..."></textarea></td></tr>
+        <input type="hidden" name="MAX_FILE_SIZE" value="500000000">
         <tr><td>Lampiran Berkas: </td><td><input type="file" name="lampiran_berkas" accept=".pdf, .doc, .docx"/><span><?php echo $errFile;?></span></td></tr>
         <tr><td><input type="submit" value="Simpan"></td><td></td></tr>
     </table>

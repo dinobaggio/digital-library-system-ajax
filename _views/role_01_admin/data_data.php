@@ -1,10 +1,66 @@
+<script src="_asset/js/public.js"></script>
 <?php
 
+$cari = '';
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if($_POST['data'] == 'ebook') {
-        echo "halo pak ini ebook<br/>";
+
+    if(isset($_POST['cari'])) {
+        $cari = array();
+        parse_str($_POST['cari'], $cari);
+        $cari = $cari['cari'];
+        if($cari != '' ) {
+            $cari = $cari;
+        } else {
+            $cari = '';
+        }
+    } else {
+        $cari = '';
+    }
+
+    if($_POST['data'] == 'ebook') { ?>
+
+<script>
+    $(document).ready(function(){
+        $("#formCari").submit(function(){
+            var cari = $("[name=cari]").serialize();
+            $.ajax({
+                url : '_views/role_01_admin/data_data.php',
+                method : 'POST',
+                data : { data : 'ebook', page : '1', cari : cari },
+                success : function(data){
+                    $("#indexData").html(data);
+                }
+            });
+        });
+    });
+</script>
+<br/>
+<form action='javascript:void(0)' id="formCari" >
+<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+</form>
+
+
+    <?php
         $fileDb = require_once('../../config/dbset.php');
-        $que = $que = "SELECT * FROM data_lampiran";
+        
+        //$kon = new PDO("mysql:host=localhost;dbname=dummy", "root", "");
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari !='') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%'";
+            } else {
+                //$que = "SELECT * FROM data_lampiran";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook'";
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran";
+            $que = "SELECT * FROM data_lampiran WHERE kategori='ebook'";
+        }
+        
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
         $banyak_page = 10;
@@ -20,7 +76,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $page = $last_page;
         }
         
-        $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        //$que = "SELECT * FROM data_lampiran WHERE kategori='ebook' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari != '') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            } else {
+                //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        }
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
@@ -61,20 +132,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <script>
             $(document).ready(function(){
                 $("#next").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'ebook', page : "<?php echo $page+1;?>"},
+                        data : { data: 'ebook', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
                     });
                 });
                 $("#previous").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'ebook', page : "<?php echo $page-1;?>"},
+                        data : { data: 'ebook', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
@@ -93,10 +166,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
+                                var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
                                     url:'_views/role_01_admin/data_data.php',
                                     method : 'post',
-                                    data : { data: 'ebook', page : "<?php echo $i;?>" },
+                                    data : { data: 'ebook', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
                                         $("#indexData").html(data);
                                     }
@@ -116,10 +190,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
+                        var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
                             url:'_views/role_01_admin/data_data.php',
                             method : 'post',
-                            data : { data: 'ebook', page : "<?php echo $i;?>" },
+                            data : { data: 'ebook', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
                                 $("#indexData").html(data);
                             }
@@ -144,10 +219,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-    if($_POST['data'] == 'jurnal') {
-        echo "halo pak ini jurnal<br/>";
+    if($_POST['data'] == 'jurnal') { ?>
+
+<script>
+    $(document).ready(function(){
+        $("#formCari").submit(function(){
+            var cari = $("[name=cari]").serialize();
+            $.ajax({
+                url : '_views/role_01_admin/data_data.php',
+                method : 'POST',
+                data : { data : 'jurnal', page : '1', cari : cari },
+                success : function(data){
+                    $("#indexData").html(data);
+                }
+            });
+        });
+    });
+</script>
+<br/>
+<form action='javascript:void(0)' id="formCari" >
+<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+</form>
+
+
+    <?php
         $fileDb = require_once('../../config/dbset.php');
-        $que = $que = "SELECT * FROM data_lampiran";
+        
+        //$kon = new PDO("mysql:host=localhost;dbname=dummy", "root", "");
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari !='') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%'";
+            } else {
+                //$que = "SELECT * FROM data_lampiran";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal'";
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran";
+            $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal'";
+        }
+        
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
         $banyak_page = 10;
@@ -163,7 +277,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $page = $last_page;
         }
         
-        $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        //$que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari != '') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            } else {
+                //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        }
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
@@ -180,8 +309,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
             </tr>
+            <script>
+                $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $.ajax({
+                        url : '_views/role_01_admin/detail_data.php',
+                        method : 'POST',
+                        data : { id: "<?php echo $baris['id'];?>" },
+                        success : function(data){
+                            $("#indexData").html(data);
+                        }
+                    });
+                });
+            </script>
             
         
             
@@ -192,20 +333,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <script>
             $(document).ready(function(){
                 $("#next").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'jurnal', page : "<?php echo $page+1;?>"},
+                        data : { data: 'jurnal', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
                     });
                 });
                 $("#previous").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'jurnal', page : "<?php echo $page-1;?>"},
+                        data : { data: 'jurnal', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
@@ -224,10 +367,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
+                                var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
                                     url:'_views/role_01_admin/data_data.php',
                                     method : 'post',
-                                    data : { data: 'jurnal', page : "<?php echo $i;?>" },
+                                    data : { data: 'jurnal', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
                                         $("#indexData").html(data);
                                     }
@@ -247,10 +391,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
+                        var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
                             url:'_views/role_01_admin/data_data.php',
                             method : 'post',
-                            data : { data: 'jurnal', page : "<?php echo $i;?>" },
+                            data : { data: 'jurnal', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
                                 $("#indexData").html(data);
                             }
@@ -275,10 +420,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-    if($_POST['data'] == 'artikel') {
-        echo "halo pak ini artikel<br/>";
+    if($_POST['data'] == 'artikel') { ?>
+
+<script>
+    $(document).ready(function(){
+        $("#formCari").submit(function(){
+            var cari = $("[name=cari]").serialize();
+            $.ajax({
+                url : '_views/role_01_admin/data_data.php',
+                method : 'POST',
+                data : { data : 'artikel', page : '1', cari : cari },
+                success : function(data){
+                    $("#indexData").html(data);
+                }
+            });
+        });
+    });
+</script>
+<br/>
+<form action='javascript:void(0)' id="formCari" >
+<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+</form>
+
+
+    <?php
         $fileDb = require_once('../../config/dbset.php');
-        $que = $que = "SELECT * FROM data_lampiran";
+        
+        //$kon = new PDO("mysql:host=localhost;dbname=dummy", "root", "");
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari !='') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%'";
+            } else {
+                //$que = "SELECT * FROM data_lampiran";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel'";
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran";
+            $que = "SELECT * FROM data_lampiran WHERE kategori='artikel'";
+        }
+        
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
         $banyak_page = 10;
@@ -294,7 +478,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $page = $last_page;
         }
         
-        $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        //$que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        if (isset($_POST['cari'])) {
+            $cari = array();
+            parse_str($_POST['cari'], $cari);
+            $cari = $cari['cari'];
+            if ($cari != '') {
+                //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            } else {
+                //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            }
+        } else {
+            //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+            $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        }
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
@@ -311,8 +510,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
             </tr>
+            <script>
+                $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $.ajax({
+                        url : '_views/role_01_admin/detail_data.php',
+                        method : 'POST',
+                        data : { id: "<?php echo $baris['id'];?>" },
+                        success : function(data){
+                            $("#indexData").html(data);
+                        }
+                    });
+                });
+            </script>
             
         
             
@@ -323,20 +534,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <script>
             $(document).ready(function(){
                 $("#next").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'artikel', page : "<?php echo $page+1;?>"},
+                        data : { data: 'artikel', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
                     });
                 });
                 $("#previous").click(function(){
+                    var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
                         url:'_views/role_01_admin/data_data.php',
                         method : 'post',
-                        data : { data: 'artikel', page : "<?php echo $page-1;?>"},
+                        data : { data: 'artikel', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
                             $("#indexData").html(data);
                         }
@@ -355,10 +568,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
+                                var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
                                     url:'_views/role_01_admin/data_data.php',
                                     method : 'post',
-                                    data : { data: 'artikel', page : "<?php echo $i;?>" },
+                                    data : { data: 'artikel', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
                                         $("#indexData").html(data);
                                     }
@@ -378,10 +592,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
+                        var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
                             url:'_views/role_01_admin/data_data.php',
                             method : 'post',
-                            data : { data: 'artikel', page : "<?php echo $i;?>" },
+                            data : { data: 'artikel', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
                                 $("#indexData").html(data);
                             }
