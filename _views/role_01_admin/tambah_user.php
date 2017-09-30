@@ -17,7 +17,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rePassword = $data['rePassword'];
     if(empty($data['username'])) {
         $errUsername = '*username harus diisi';
-        
+    } else {
+        $username = $data['username'];
+        $loadDb = require_once('../../config/dbset.php');
+        $que = "SELECT username FROM pengguna WHERE username='$username'";
+        $tugas = $kon->query($que);
+        $tugas->execute();
+        $user = $tugas->rowCount();
+        $loadDb = null;
+        if($user == 1) {
+            $errUsername = '*user sudah ada silahkan gunakan yang lain';
+        } else {
+            $username = $data['username'];
+            $errUsername = '';
+        }
     }
 
     if(empty($data['password'])) {
@@ -29,7 +42,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         if ($data['password'] !== $data['rePassword']) {
             $errRePassword = '*password ulang tidak sama';
+        } else {
+            $password = $data['password'];
         }
+    }
+
+    if ($username != '' &&
+    $password != '' &&
+    $errPassword == '' &&
+    $errRePassword == '' &&
+    $errUsername == '') {
+        $dbLoad = require_once('../../config/dbset.php');
+        $que = "INSERT INTO pengguna (username, password, role) VALUES (:username, :password, :role)";
+        $tugas = $kon->prepare($que);
+        $tugas->bindParam(':username', $username);
+        $tugas->bindParam(':password', $password);
+        $tugas->bindParam(':role', $role);
+        $password = md5($password);
+        $role = 'user';
+        if($tugas->execute()) {
+            echo "sukses memasukan data";
+            $username = '';
+            $password = empty($password);
+            $rePassword = empty($rePassword);
+        }
+        unset($dbLoad);
+        unset($kon);
     }
 
 

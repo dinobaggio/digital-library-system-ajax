@@ -31,7 +31,8 @@ $(document).ready(function(){
 });
 </script>
 
-<h2>User masih dalam pembuatan</h2><br/>
+<h1>Selamat datang <?php echo $_SESSION['username'];?></h1>
+<p>User masih dalam pembuatan</p><br/>
 <button id='lihatData'>Lihat list data</button> <button id="logout" >Logout</button> 
 
 <div id="indexUser">

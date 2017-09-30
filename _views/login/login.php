@@ -23,7 +23,6 @@ $(document).ready(function(){
 </script>
 <script src="_asset/js/public.js"></script>
 <?php
-$session = null;
 
 if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
    switch($_SESSION['role']) {
