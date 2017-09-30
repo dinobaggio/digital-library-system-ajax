@@ -30,12 +30,16 @@ $(document).ready(function(){
     $("#tmbhData").click(function(){
         $("#indexAdmin").load('_views/role_01_admin/tambah_data.php');
     });
+    $("#tmbhUser").click(function(){
+        $("#indexAdmin").load('_views/role_01_admin/tambah_user.php');
+    });
 });
 </script>
 
 <h2>Admin masih dalam pembuatan</h2><br/>
 <button id="listData" >Lihat List Data</button> 
 <button id="tmbhData">Tambah Data</button> 
+<button id="tmbhUser">Tambah User</button>
 <button id="logout" >Logout</button>
 
 <div id="indexAdmin">
