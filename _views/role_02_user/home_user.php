@@ -22,6 +22,9 @@ $("indexAjax").load('_views/login/login.php');
 
 <script> 
 $(document).ready(function(){
+    $("#lihatData").click(function(){
+        $("#indexUser").load("_views/role_01_admin/list_data.php");
+    });
     $("#logout").click(function(){
         $('#indexAjax').load('_controllers/login/logout_controller.php');
     });
@@ -29,7 +32,11 @@ $(document).ready(function(){
 </script>
 
 <h2>User masih dalam pembuatan</h2><br/>
-<button id="logout" >Logout</button>
+<button id='lihatData'>Lihat list data</button> <button id="logout" >Logout</button> 
+
+<div id="indexUser">
+
+</div>
 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
     if (document.getElementById("indexAjax") == null) {
