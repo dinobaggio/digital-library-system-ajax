@@ -2,6 +2,18 @@
 <script>
 
 $(document).ready(function(){
+    $("#all").click(function(){
+        $.ajax({
+            url : '_views/role_01_admin/data_data.php',
+            method : 'post',
+            data : {data : 'all', page : '1' },
+            success : function(data){
+                $("#indexData").html(data);
+            }
+        });
+    });
+
+
 
     $("#ebook").click(function(){
         $.ajax({
@@ -38,11 +50,11 @@ $(document).ready(function(){
 </script>
 
 <h2>List data masih dalam pengembagan</h2>
-<button id='ebook'>E-book</button> <button id='jurnal'>Jurnal</button> <button id='artikel'>Artikel</button><br/>
+<button id='all'>All</button> <button id='ebook'>E-book</button> <button id='jurnal'>Jurnal</button> <button id='artikel'>Artikel</button><br/>
 <div id='indexData'>
 
 <script>
-$("#indexData").load('_views/role_01_admin/data_data.php');
+$("#indexData").load('_views/role_01_admin/data_data.php', { data : 'all', page : '1'});
 </script>
 
 </div>

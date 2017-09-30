@@ -65,8 +65,8 @@ $info_detail = $_POST['info_detail'];
         $fileName = $_FILES['lampiran_berkas']['name'];
         $tmpName = $_FILES["lampiran_berkas"]["tmp_name"];
         $fileType = $_FILES["lampiran_berkas"]["type"];
-        if($fileSize > 500000000 ) {
-            $errFile = "file tidak boleh lebih dari 500Mb";
+        if($fileSize > 2000000 ) {
+            $errFile = "*file tidak boleh lebih dari 2Mb";
         } else {
             $fp = fopen($tmpName, "r");
             $content = fread($fp, filesize($tmpName));
@@ -85,13 +85,48 @@ $info_detail = $_POST['info_detail'];
         try {
             $que = "INSERT INTO upload (nama_file, file_size, file_type, content) VALUES ('$fileName', '$fileSize', '$fileType', '$content' )";
             $kon -> exec($que);
+            /* $que = "INSERT INTO upload (nama_file, file_size, file_type, content) VALUES (:fileName, :fileSize, :fileType, :content)";
+            $tugas = $kon->prepare($que);
+            $tugas->bindParam(':fileName', $fileName);
+            $tugas->bindParam(':fileSize', $fileSize);
+            $tugas->bindParam(':fileType', $fileType);
+            $tugas->bindParam(':content', $content);
+            $tugas->execute(); */
             $id_upload = $kon->lastInsertId();
             $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit,
             tahun_penerbit, tempat_penerbit, info_detail, id_upload) VALUES ('$judul', 
             '$pengarang', '$kategori', '$bahasa', '$penerbit', '$tahun_penerbit', '$tempat_penerbit', '$info_detail', '$id_upload')";
-            $kon->exec($que);
+            $status = 0;
+            if($kon->exec($que)){
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+            $id_lampiran = $kon->lastInsertId();
             unset($fileDb);
-            unset($kon);
+            unset($kon); 
+            
+            if ($status == 1) {
+            ?>
+            
+             <script>
+             $("#indexAdmin").html('tunggu sebentar ...');
+                setTimeout(function(){
+                    $.ajax({
+                        url : '_views/role_01_admin/detail_data.php',
+                        method : 'POST',
+                        data : { id : "<?php echo $id_upload;?>" },
+                        success : function(data){
+                            $("#indexAdmin").html(data);
+                        }
+                    });
+                }, 0);
+            </script> 
+            
+            
+<?php
+            }
+
         } catch (PDOException $e) {
             echo "error: ".$e->getMessage();
         }
@@ -107,3 +142,14 @@ $info_detail = $_POST['info_detail'];
 
 
 ?>
+
+
+
+
+
+
+<script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
+    if (document.getElementById("indexAjax") == null) {
+        window.open("../../index.php","_self");
+    }
+</script>
