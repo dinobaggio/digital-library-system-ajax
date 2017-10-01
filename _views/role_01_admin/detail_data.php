@@ -11,7 +11,8 @@ if(isset($_POST['id'])) {
         $id_upload = $data['id_upload'];
         ?>
     <script src="_asset/js/jquery-3.2.1.js"></script>
-    <h1><?php echo $data['judul'];?></h1>
+
+    <div class="w3-container w3-padding w3-black"><h1><?php echo $data['judul'];?></h1></div>
     <p>Pengarang : <?php echo $data['pengarang'];?></p>
     <p>Kategori : <?php echo $data['kategori'];?></p>
     <p>Bahasa : <?php echo $data['bahasa'];?></p>
@@ -20,7 +21,7 @@ if(isset($_POST['id'])) {
     <p>Tempat Penerbit: <?php echo $data['tempat_penerbit'];?></p>
     <p>Info Lainnya : <?php echo $data['info_detail'];?></p>
     <p>Id Upload : <?php echo $id_upload;?></p>
-    <button id='lihat'>Lihat</button> <button id='download'>download</button>
+    <button id='lihat' class='tombolKonten'>Lihat</button> <button id='download' class='tombolKonten'>download</button>
     <p id='pDownload' style="display:none"></p>
     <script>
     $("#lihat").click(function(){

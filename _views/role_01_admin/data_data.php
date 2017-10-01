@@ -37,7 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -96,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -108,16 +110,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $("#id01").show();
                     $.ajax({
                         url : '_views/role_01_admin/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            //$("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -156,14 +160,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -187,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -210,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
@@ -238,7 +242,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -297,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -309,16 +315,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $("#id01").show();
                     $.ajax({
                         url : '_views/role_01_admin/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            //$("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -357,14 +365,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -388,7 +396,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -411,7 +419,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
@@ -439,7 +447,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -498,7 +508,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -510,16 +520,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $("#id01").show();
                     $.ajax({
                         url : '_views/role_01_admin/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            //$("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -558,14 +570,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -589,7 +601,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -612,7 +624,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
@@ -639,7 +651,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -698,7 +712,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -710,16 +724,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['tahun_penerbit'];?></td>
             <td><?php echo $baris['tempat_penerbit'];?></td>
             <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
+            <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
+                    $("#id01").show();
                     $.ajax({
                         url : '_views/role_01_admin/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            //$("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -758,14 +774,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -789,7 +805,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -812,7 +828,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         

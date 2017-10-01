@@ -23,7 +23,7 @@ $("indexAjax").load('_views/login/login.php');
 <script> 
 $(document).ready(function(){
     $("#lihatData").click(function(){
-        $("#indexUser").load("_views/role_01_admin/list_data.php");
+        $("#indexUser").load("_views/role_02_user/list_data.php");
     });
     $("#logout").click(function(){
         $('#indexAjax').load('_controllers/login/logout_controller.php');

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $("#formCari").submit(function(){
             var cari = $("[name=cari]").serialize();
             $.ajax({
-                url : '_views/role_01_admin/data_data.php',
+                url : '_views/role_02_user/data_data.php',
                 method : 'POST',
                 data : { data : 'ebook', page : '1', cari : cari },
                 success : function(data){
@@ -37,7 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -113,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
-                        url : '_views/role_01_admin/detail_data.php',
+                        url : '_views/role_02_user/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
@@ -134,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#next").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'ebook', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
@@ -145,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'ebook', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
@@ -168,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
-                                    url:'_views/role_01_admin/data_data.php',
+                                    url:'_views/role_02_user/data_data.php',
                                     method : 'post',
                                     data : { data: 'ebook', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
@@ -192,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
-                            url:'_views/role_01_admin/data_data.php',
+                            url:'_views/role_02_user/data_data.php',
                             method : 'post',
                             data : { data: 'ebook', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
@@ -226,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $("#formCari").submit(function(){
             var cari = $("[name=cari]").serialize();
             $.ajax({
-                url : '_views/role_01_admin/data_data.php',
+                url : '_views/role_02_user/data_data.php',
                 method : 'POST',
                 data : { data : 'jurnal', page : '1', cari : cari },
                 success : function(data){
@@ -238,7 +240,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -314,7 +318,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
-                        url : '_views/role_01_admin/detail_data.php',
+                        url : '_views/role_02_user/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
@@ -335,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#next").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'jurnal', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
@@ -346,7 +350,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'jurnal', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
@@ -369,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
-                                    url:'_views/role_01_admin/data_data.php',
+                                    url:'_views/role_02_user/data_data.php',
                                     method : 'post',
                                     data : { data: 'jurnal', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
@@ -393,7 +397,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
-                            url:'_views/role_01_admin/data_data.php',
+                            url:'_views/role_02_user/data_data.php',
                             method : 'post',
                             data : { data: 'jurnal', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
@@ -427,7 +431,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $("#formCari").submit(function(){
             var cari = $("[name=cari]").serialize();
             $.ajax({
-                url : '_views/role_01_admin/data_data.php',
+                url : '_views/role_02_user/data_data.php',
                 method : 'POST',
                 data : { data : 'artikel', page : '1', cari : cari },
                 success : function(data){
@@ -439,7 +443,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -515,7 +521,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
-                        url : '_views/role_01_admin/detail_data.php',
+                        url : '_views/role_02_user/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
@@ -536,7 +542,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#next").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'artikel', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
@@ -547,7 +553,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'artikel', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
@@ -570,7 +576,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
-                                    url:'_views/role_01_admin/data_data.php',
+                                    url:'_views/role_02_user/data_data.php',
                                     method : 'post',
                                     data : { data: 'artikel', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
@@ -594,7 +600,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
-                            url:'_views/role_01_admin/data_data.php',
+                            url:'_views/role_02_user/data_data.php',
                             method : 'post',
                             data : { data: 'artikel', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){
@@ -627,7 +633,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $("#formCari").submit(function(){
             var cari = $("[name=cari]").serialize();
             $.ajax({
-                url : '_views/role_01_admin/data_data.php',
+                url : '_views/role_02_user/data_data.php',
                 method : 'POST',
                 data : { data : 'all', page : '1', cari : cari },
                 success : function(data){
@@ -639,7 +645,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </script>
 <br/>
 <form action='javascript:void(0)' id="formCari" >
-<input type='text' name='cari' value='<?php echo $cari;?>'/> <input type='submit' value='Cari' />
+<table>
+<tr><td><input type='text' name='cari' value='<?php echo $cari;?>'/></td> <td><input type='submit' value='Cari' /></td></tr>
+</table>
 </form>
 
 
@@ -715,7 +723,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
-                        url : '_views/role_01_admin/detail_data.php',
+                        url : '_views/role_02_user/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
@@ -736,7 +744,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#next").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'all', page : "<?php echo $page+1;?>", cari:cari},
                         success : function(data){
@@ -747,7 +755,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
                     $.ajax({
-                        url:'_views/role_01_admin/data_data.php',
+                        url:'_views/role_02_user/data_data.php',
                         method : 'post',
                         data : { data: 'all', page : "<?php echo $page-1;?>", cari:cari},
                         success : function(data){
@@ -770,7 +778,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
-                                    url:'_views/role_01_admin/data_data.php',
+                                    url:'_views/role_02_user/data_data.php',
                                     method : 'post',
                                     data : { data: 'all', page : "<?php echo $i;?>", cari:cari },
                                     success : function(data){
@@ -794,7 +802,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
-                            url:'_views/role_01_admin/data_data.php',
+                            url:'_views/role_02_user/data_data.php',
                             method : 'post',
                             data : { data: 'all', page : "<?php echo $i;?>", cari:cari },
                             success : function(data){

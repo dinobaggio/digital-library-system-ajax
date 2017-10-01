@@ -35,7 +35,7 @@ if(isset($_POST['id'])) {
      <p id="lihatPdf" style="display:none"></p> 
     <script>
         $.ajax({
-            url:'_views/role_01_admin/get_pdf.php',
+            url:'_views/role_02_user/get_pdf.php',
             method : 'get',
             data: { id: "<?php echo $id_upload;?>"},
             success : function (data) {

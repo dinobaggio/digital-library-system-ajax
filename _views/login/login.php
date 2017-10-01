@@ -56,6 +56,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
 <div class="w3-section">
     <form id="formLogin" method="POST" action="javascript:void(0)">
         <table>
+            <tr><td colspan='2' class="w3-container w3-green" ><h3>Login</h3></td></tr>
             <tr><td>Username: </td><td><input type="text" name="username" value="<?php echo $username;?>" placeholder="Username"></td></tr>
             <tr><td>Password: </td><td><input type="password" name="password" value="<?php echo $password;?>" placeholder="Password"></td></tr>
             <tr><td><input type="submit" value="Login" /></td><td><span class="w3-text-red"><?php echo $errLogin;?></span></td></tr>
