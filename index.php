@@ -5,7 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="_asset/css/w3css.css" rel="stylesheet" />
-        <link href="_asset/css/font_awesome/css/font-awesome.css" />
+        <link href="_asset/css/font_awesome/css/font-awesome.css" rel="stylesheet" />
         <script src="_asset/js/jquery-3.2.1.js"></script>
         <script>
             $(document).ready(function(){

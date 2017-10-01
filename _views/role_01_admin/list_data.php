@@ -11,6 +11,8 @@ $(document).ready(function(){
                 $("#indexData").html(data);
             }
         });
+        $(this).addClass('w3-brown');
+    
     });
 
     $("#ebook").click(function(){
@@ -48,7 +50,7 @@ $(document).ready(function(){
 </script>
 
 <h2>List data masih dalam pengembagan</h2>
-<button id='all' class='tombolKonten'>All</button> <button id='ebook' class='tombolKonten'>E-book</button> <button id='jurnal' class='tombolKonten'>Jurnal</button> <button id='artikel' class='tombolKonten'>Artikel</button><br/>
+<button id='all' class='tombolKonten w3-white'>All</button> <button id='ebook' class='tombolKonten'>E-book</button> <button id='jurnal' class='tombolKonten'>Jurnal</button> <button id='artikel' class='tombolKonten'>Artikel</button><br/>
 <div id='indexData'>
 
 <script>

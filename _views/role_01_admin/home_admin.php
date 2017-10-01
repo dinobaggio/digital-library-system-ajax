@@ -26,19 +26,28 @@ $(document).ready(function(){
     });
     $("#listData").click(function(){
         $("#indexAdmin").load("_views/role_01_admin/list_data.php");
+        $(this).addClass('w3-opacity');
+        $("#tmbhData").removeClass('w3-opacity');
+        $("#tmbhUser").removeClass('w3-opacity');
     });
     $("#tmbhData").click(function(){
         $("#indexAdmin").load('_views/role_01_admin/tambah_data.php');
+        $(this).addClass('w3-opacity');
+        $("#listData").removeClass('w3-opacity');
+        $("#tmbhUser").removeClass('w3-opacity');
     });
     $("#tmbhUser").click(function(){
         $("#indexAdmin").load('_views/role_01_admin/tambah_user.php');
+        $(this).addClass('w3-opacity');
+        $("#listData").removeClass('w3-opacity');
+        $("#tmbhData").removeClass('w3-opacity');
     });
     
 });
 </script>
 
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:19%;top:0px;" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-border-bottom w3-large"><img src="http://sps-perbanas.ac.id/files/Logo.png" style="width:60%;"></button>
+  <button class="w3-bar-item w3-button w3-border-bottom w3-large"><img src="http://sps-perbanas.ac.id/files/Logo.png" style="width:80%;"></button>
   <button onclick="w3_close()" title="Close Sidemenu" class="w3-bar-item w3-button w3-hide-large w3-large">Close <i class="fa fa-remove"></i></button>
   <button class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align" onclick="document.getElementById('id01').style.display='block'" style="display:none;">New Message <i class="w3-padding fa fa-pencil"></i></button>
   <button id="myBtn" onclick="myFunc('Demo1')" class="w3-bar-item w3-button"><i class="fa fa-bars w3-margin-right"></i>Aksi<i class="fa fa-caret-down w3-margin-left"></i></button>
@@ -69,7 +78,7 @@ var openInbox = document.getElementById("myBtn");
         openInbox.click();
 </script>
 
-<div class="w3-main" style="margin-left:243px;">
+<div class="w3-main w3-animate-right" style="margin-left:243px;">
 <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
 <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'" style="display:none;"><i class="fa fa-pencil"></i></a>
 <h1>Selamat datang <?php echo $_SESSION['username'];?></h1>
@@ -81,7 +90,7 @@ var openInbox = document.getElementById("myBtn");
 <div id="id01" class="w3-modal" style="z-index:4">
     <div class="w3-modal-content w3-animate-zoom">
         <span onclick="document.getElementById('id01').style.display='none'"
-       class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i>X</span>
+       class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
        <div class="w3-container w3-padding" id='detailData'></div>
     </div>
 </div>

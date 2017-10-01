@@ -53,17 +53,26 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
     
      ?>
 
-<div class="w3-section">
-    <form id="formLogin" method="POST" action="javascript:void(0)">
-        <table>
-            <tr><td colspan='2' class="w3-container w3-green" ><h3>Login</h3></td></tr>
-            <tr><td>Username: </td><td><input type="text" name="username" value="<?php echo $username;?>" placeholder="Username"></td></tr>
-            <tr><td>Password: </td><td><input type="password" name="password" value="<?php echo $password;?>" placeholder="Password"></td></tr>
-            <tr><td><input type="submit" value="Login" /></td><td><span class="w3-text-red"><?php echo $errLogin;?></span></td></tr>
-        </table>
-    </form>
+<div id='login' class="w3-modal" style="z-index:4">
+    <div class="w3-modal-content w3-animate-zoom" style='width:500px;'>
+        <form id="formLogin" method="POST" action="javascript:void(0)">
+        <div colspan='2' class="w3-container w3-green" ><h3>Login</h3></div>
+            <table class='w3-border' >
+                <tr><td></td><td></td><td rowspan='3' align='center' style='width:40%;'><img  src='http://old.perbanas.id/attachments/article/1034/Logo%20Vertikal.png' style='width:50%' alt='avatar' /></td></tr>
+                <tr><td>Username: </td><td><input type="text" name="username" value="<?php echo $username;?>" placeholder="Username"></td></tr>
+                <tr><td>Password: </td><td><input type="password" name="password" value="<?php echo $password;?>" placeholder="Password"></td></tr>
+                <tr><td><input type="submit" value="Login" /></td><td><span class="w3-text-red"><?php echo $errLogin;?></span></td></tr>
+            </table> 
+        </form>
+    </div>
+
 </div>
 
+<script>
+
+$("#login").show();
+
+</script>
 
 <?php
 }
