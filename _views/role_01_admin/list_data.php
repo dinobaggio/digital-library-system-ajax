@@ -48,15 +48,16 @@ $(document).ready(function(){
 });
 
 </script>
+<div class='w3-animate-right w3-section' >
+    <h2>List Data</h2>
+    <button id='all' class='tombolKonten w3-white'>All</button> <button id='ebook' class='tombolKonten'>E-book</button> <button id='jurnal' class='tombolKonten'>Jurnal</button> <button id='artikel' class='tombolKonten'>Artikel</button><br/>
+    <div id='indexData'>
 
-<h2>List data masih dalam pengembagan</h2>
-<button id='all' class='tombolKonten w3-white'>All</button> <button id='ebook' class='tombolKonten'>E-book</button> <button id='jurnal' class='tombolKonten'>Jurnal</button> <button id='artikel' class='tombolKonten'>Artikel</button><br/>
-<div id='indexData'>
+    <script>
+    $("#indexData").load('_views/role_01_admin/data_data.php', { data : 'all', page : '1'});
+    </script>
 
-<script>
-$("#indexData").load('_views/role_01_admin/data_data.php', { data : 'all', page : '1'});
-</script>
-
+    </div>
 </div>
 
 

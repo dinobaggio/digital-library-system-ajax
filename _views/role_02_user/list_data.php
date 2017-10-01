@@ -47,13 +47,13 @@ $(document).ready(function(){
 
 </script>
 
-<h2>List data masih dalam pengembagan</h2>
-<button id='all'>All</button> <button id='ebook'>E-book</button> <button id='jurnal'>Jurnal</button> <button id='artikel'>Artikel</button><br/>
+
+
 <div id='indexData'>
 
-<script>
-$("#indexData").load('_views/role_02_user/data_data.php', { data : 'all', page : '1'});
-</script>
+    <script>
+    $("#indexData").load('_views/role_02_user/data_data.php', { data : 'all', page : '1'});
+    </script>
 
 </div>
 

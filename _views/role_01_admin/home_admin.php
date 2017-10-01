@@ -81,15 +81,14 @@ var openInbox = document.getElementById("myBtn");
 <div class="w3-main w3-animate-right" style="margin-left:243px;">
 <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
 <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'" style="display:none;"><i class="fa fa-pencil"></i></a>
-<h1>Selamat datang <?php echo $_SESSION['username'];?></h1>
-<p>Admin masih dalam pembuatan</p><br/>
+<div class='w3-container w3-indigo'><h1>Selamat datang <?php echo $_SESSION['username'];?></h1></div>
     <div id="indexAdmin" class="">
     </div>
 </div>
 
 <div id="id01" class="w3-modal" style="z-index:4">
     <div class="w3-modal-content w3-animate-zoom">
-        <span onclick="document.getElementById('id01').style.display='none'"
+        <span onclick="$('#id01').fadeOut('slow')"
        class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
        <div class="w3-container w3-padding" id='detailData'></div>
     </div>

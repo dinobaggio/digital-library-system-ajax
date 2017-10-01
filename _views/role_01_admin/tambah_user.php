@@ -94,19 +94,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </script>
 
+<div class='w3-animate-right w3-section'>
+    <h2>Tambah User</h2>
 
-<h2>Tambah User masih dalam proses pengembangan</h2>
-
-<form id='formUser' action='javascript:void(0)'>
-<table>
-<tr><td>Username : </td><td><input type='text' name='username' value="<?php echo $username;?>" placeholder='Username ...' /><span><?php echo $errUsername; ?></span></td></tr>
-<tr><td>Password : </td><td><input type='password' name='password' value="<?php echo $password;?>" placeholder='Password ...' /><span><?php echo $errPassword; ?></span></td></tr>
-<tr><td>Ulangi Password : </td><td><input type='password' name='rePassword' value="<?php echo $rePassword;?>" placeholder='Password ...' /><span><?php echo $errRePassword;?></span></td></tr>
-<tr><td><input type='submit' value='simpan!'></td></tr>
-
-</table>
-</form>
-
+    <form id='formUser' action='javascript:void(0)'>
+    <table>
+        <tr><td>Username : </td><td><input type='text' name='username' value="<?php echo $username;?>" placeholder='Username ...' /></td><td><span class='error'><?php echo $errUsername; ?></span></td></tr>
+        <tr><td>Password : </td><td><input type='password' name='password' value="<?php echo $password;?>" placeholder='Password ...' /></td><td><span class='error'><?php echo $errPassword; ?></span></td></tr>
+        <tr><td>Ulangi Password : </td><td><input type='password' name='rePassword' value="<?php echo $rePassword;?>" placeholder='Password ...' /></td><td><span class='error'><?php echo $errRePassword;?></span></td></tr>
+        <tr><td><input type='submit' value='simpan!'></td></tr>
+    </table>
+    </form>
+</div>
 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
     if (document.getElementById("indexAjax") == null) {
