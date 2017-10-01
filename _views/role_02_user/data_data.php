@@ -110,7 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <p><?php echo $baris['info_detail'];?></p>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
-                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                            <p><button class="w3-padding-large tombolKonten w3-border" onclick="$('#id01').fadeIn()"
+                             name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
                         </div>
                     </div>
                 </div>
@@ -123,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -317,7 +318,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <p><?php echo $baris['info_detail'];?></p>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
-                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                            <p><button class="w3-padding-large tombolKonten w3-border" onclick="$('#id01').fadeIn()"
+                             name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
                         </div>
                     </div>
                 </div>
@@ -330,7 +332,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -524,7 +526,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <p><?php echo $baris['info_detail'];?></p>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
-                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                            <p><button class="w3-padding-large tombolKonten w3-border" onclick="$('#id01').fadeIn()"
+                             name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
                         </div>
                     </div>
                 </div>
@@ -537,7 +540,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });
@@ -698,7 +701,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $page = $last_page;
         }
         
-        //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+        //$que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
         if (isset($_POST['cari'])) {
             $cari = array();
             parse_str($_POST['cari'], $cari);
@@ -730,20 +733,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <p><?php echo $baris['info_detail'];?></p>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
-                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                            <p><button class="w3-padding-large tombolKonten w3-border" onclick="$('#id01').fadeIn()"
+                             id="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <script>
-                $("[name=<?php echo $baris['id']?>]").click(function(){
+                $("#<?php echo $baris['id']?>").click(function(){
                     $.ajax({
                         url : '_views/role_02_user/detail_data.php',
                         method : 'POST',
                         data : { id: "<?php echo $baris['id'];?>" },
                         success : function(data){
-                            $("#indexData").html(data);
+                            $("#detailData").html(data);
                         }
                     });
                 });

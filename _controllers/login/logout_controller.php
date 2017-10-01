@@ -5,6 +5,6 @@ session_destroy();
 
 
 <script>
-$("#indexAjax").load('_views/login/login.php');
 
+$("#indexAjax").load('_views/login/login.php');
 </script>

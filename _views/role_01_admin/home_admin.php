@@ -54,17 +54,17 @@ $(document).ready(function(){
   <div id="Demo1" class="w3-hide w3-animate-left">
     <button class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" id="listData">
       <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="http://icons.iconarchive.com/icons/icons8/windows-8/512/Data-List-icon.png" style="width:7%;"><span class="w3-opacity w3-large">Lihat List Data</span>
+        <img class="w3-round w3-margin-right" src="_asset/gambar/list_data.png" style="width:7%;"><span class="w3-opacity w3-large">Lihat List Data</span>
       </div>
     </button>
      <button class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" id="tmbhData">
       <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="https://cdn2.iconfinder.com/data/icons/serverico-nic/128/Data_Database_Server_Network_Storage_Store_Save_System_Connection_Connect_Lan_Communication_Share_Sharing_Hosting_Mysql_Oracle_Add_Create_Insert_Plus-512.png" style="width:7%;"><span class="w3-opacity w3-large">Tambah Data</span>
+        <img class="w3-round w3-margin-right" src="_asset/gambar/tambah_data.png" style="width:7%;"><span class="w3-opacity w3-large">Tambah Data</span>
       </div>
     </button>
     <button class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" id="tmbhUser">
       <div class="w3-container">
-        <img class="w3-round w3-margin-right" src="https://maxcdn.icons8.com/Share/icon/Users//add_user_group_filled1600.png" style="width:7%;"><span class="w3-opacity w3-large">Tambah User</span>
+        <img class="w3-round w3-margin-right" src="_asset/gambar/tambah_user.png" style="width:7%;"><span class="w3-opacity w3-large">Tambah User</span>
       </div>
     </button>
   </div>
@@ -81,16 +81,13 @@ var openInbox = document.getElementById("myBtn");
 <div class="w3-main w3-animate-right" style="margin-left:243px;">
 <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
 <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'" style="display:none;"><i class="fa fa-pencil"></i></a>
-<div class='w3-container w3-indigo'><h1>Selamat datang <?php echo $_SESSION['username'];?></h1></div>
+<div class='w3-container w3-padding-16 w3-indigo'><h1>Selamat datang <?php echo $_SESSION['username'];?></h1></div>
     <div id="indexAdmin" class="">
     </div>
 </div>
 
 <div id="id01" class="w3-modal" style="z-index:4">
-    <div class="w3-modal-content w3-animate-zoom">
-        <span onclick="$('#id01').fadeOut('slow')"
-       class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
-       <div class="w3-container w3-padding" id='detailData'></div>
+    <div class="w3-modal-content w3-animate-zoom" id='detailData'>
     </div>
 </div>
 

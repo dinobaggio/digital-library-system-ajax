@@ -12,7 +12,11 @@ if(isset($_POST['id'])) {
         ?>
     <script src="_asset/js/jquery-3.2.1.js"></script>
 
-    <div class="w3-container w3-padding w3-black"><h1><?php echo $data['judul'];?></h1></div>
+    <div class="w3-container w3-padding w3-black">
+        <span onclick="$('#id01').fadeOut('slow')" class="w3-button w3-red w3-right"><i class="fa fa-remove" ></i></span>
+        <h1><?php echo $data['judul'];?></h1>
+    </div>
+    <div class="w3-container w3-padding" >
     <p>Pengarang : <?php echo $data['pengarang'];?></p>
     <p>Kategori : <?php echo $data['kategori'];?></p>
     <p>Bahasa : <?php echo $data['bahasa'];?></p>
@@ -44,6 +48,7 @@ if(isset($_POST['id'])) {
             }
         })
     </script>
+    </div>
     <?php
     } catch(PDOException $e) {
         echo "error :".$e->getMessage();

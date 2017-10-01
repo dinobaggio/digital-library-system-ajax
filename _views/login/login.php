@@ -30,6 +30,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
        case $_SESSION['role'] == 'admin' : ?>
 
          <script>
+            $("body").removeClass("w3-cyan");
+            $("body").addClass("w3-teal");
             $("#indexAjax").load("_views/role_01_admin/home_admin.php");
         </script>   
  
@@ -38,6 +40,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
        case $_SESSION['role'] == 'user' : ?>
 
          <script>
+            $("body").removeClass("w3-teal");
+            $("body").addClass("w3-cyan");
             $("#indexAjax").load("_views/role_02_user/home_user.php");
         </script>   
  
@@ -70,7 +74,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['role'])) {
 </div>
 
 <script>
-
+$("body").removeClass("w3-cyan");
+$("body").removeClass("w3-teal");
 $("#login").show();
 
 </script>

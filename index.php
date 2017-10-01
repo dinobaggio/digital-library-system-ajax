@@ -16,7 +16,7 @@
         </script>
         <script src="_asset/js/public.js">// public JS </script>
     </head>
-    <body class="">
+    <body>
     <!-- <h1>Digital Library System by Dinobaggio</h1>
     <br/><button id="dinobaggio">dinobaggio.github.io</button> <br/> -->
     <div id="indexAjax"> 

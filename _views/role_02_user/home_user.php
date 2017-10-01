@@ -31,10 +31,10 @@ $(document).ready(function(){
 });
 </script>
 
-<header class="w3-container w3-center w3-animate-top">
+<header class="w3-container w3-center w3-animate-top w3-padding-16 w3-indigo ">
     <h2>User Page</h2>
     <button id='all' class='tombolKonten'>All</button> <button id='ebook' class='tombolKonten'>E-book</button> <button id='jurnal' class='tombolKonten'>Jurnal</button> <button id='artikel' class='tombolKonten'>Artikel</button>
-    <hr>
+    <br/>
 </header>
 
 <script>
@@ -116,6 +116,16 @@ $(document).ready(function(){
 
 </div>
 
+
+
+<!-- MODAL -->
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4" id="detailData">
+    </div>
+</div>
+
+<!-- AKHIR MODAL -->
 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
     if (document.getElementById("indexAjax") == null) {
