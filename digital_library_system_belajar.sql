@@ -1,12 +1,31 @@
-# digital-library-system-ajax
-Ajax Digital Libray System
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: 01 Okt 2017 pada 18.16
+-- Versi Server: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
-#Installation
-create database 'digital_library_system_belajar',
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-On your database, open a SQL terminal paste this and execute:
 
-```sql
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `digital_library_system_belajar`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `data_lampiran`
+--
+
 CREATE TABLE `data_lampiran` (
   `id` int(11) NOT NULL,
   `judul` varchar(50) NOT NULL,
@@ -20,11 +39,11 @@ CREATE TABLE `data_lampiran` (
   `id_upload` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `data_lampiran`
-  ADD PRIMARY KEY (`id`);
+-- --------------------------------------------------------
 
-ALTER TABLE `data_lampiran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Struktur dari tabel `pengguna`
+--
 
 CREATE TABLE `pengguna` (
   `username` varchar(50) NOT NULL,
@@ -32,8 +51,9 @@ CREATE TABLE `pengguna` (
   `role` set('admin','user') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`username`);
+--
+-- Dumping data untuk tabel `pengguna`
+--
 
 INSERT INTO `pengguna` (`username`, `password`, `role`) VALUES
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
@@ -41,6 +61,12 @@ INSERT INTO `pengguna` (`username`, `password`, `role`) VALUES
 ('user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user'),
 ('user1', '24c9e15e52afc47c225b757e7bee1f9d', 'user'),
 ('user2', '7e58d63b60197ceb55a1c487989a3720', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `upload`
+--
 
 CREATE TABLE `upload` (
   `id` int(11) NOT NULL,
@@ -50,29 +76,42 @@ CREATE TABLE `upload` (
   `content` longblob
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `data_lampiran`
+--
+ALTER TABLE `data_lampiran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `upload`
+--
 ALTER TABLE `upload`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `data_lampiran`
+--
+ALTER TABLE `data_lampiran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `upload`
+--
 ALTER TABLE `upload`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-```
-
-or you can use file digital_library_system_belajar.sql, and import to your database ...
-
-#Login
-
-username : admin, password : admin
-
-username : user, password : user
-
-username : user1, password : user1
-
-username : user2, password : user2
-
-username : dino, password : dino
-
