@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -272,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
-        $banyak_page = 10;
+        $banyak_page = 5;
         $last_page = ceil($total/$banyak_page);
         if($last_page < 1) {
             $last_page = 1;
@@ -305,21 +305,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<h3>Jurnal</h3>";
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        //echo "<table>";
+        //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
+                </div>
+                <div class="w3-container">
+                    <p><?php echo $baris['info_detail'];?></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-            <td><?php echo $baris['judul'];?></td>
-            <td><?php echo $baris['pengarang'];?></td>
-            <td><?php echo $baris['kategori'];?></td>
-            <td><?php echo $baris['bahasa'];?></td>
-            <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
-            </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
@@ -337,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        //echo "</table>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -366,14 +369,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -397,7 +400,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -420,7 +423,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
@@ -476,7 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
-        $banyak_page = 10;
+        $banyak_page = 5;
         $last_page = ceil($total/$banyak_page);
         if($last_page < 1) {
             $last_page = 1;
@@ -509,21 +512,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<h3>Artikel</h3>";
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        //echo "<table>";
+        //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
+                </div>
+                <div class="w3-container">
+                    <p><?php echo $baris['info_detail'];?></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-            <td><?php echo $baris['judul'];?></td>
-            <td><?php echo $baris['pengarang'];?></td>
-            <td><?php echo $baris['kategori'];?></td>
-            <td><?php echo $baris['bahasa'];?></td>
-            <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
-            </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
@@ -541,7 +547,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        //echo "</table>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -570,14 +576,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -601,7 +607,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -624,7 +630,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
@@ -679,7 +685,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         $tugas = $kon->query($que);
         $total = $tugas->rowCount();
-        $banyak_page = 10;
+        $banyak_page = 5;
         $last_page = ceil($total/$banyak_page);
         if($last_page < 1) {
             $last_page = 1;
@@ -712,21 +718,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($fileDb);
         unset($kon);
         echo "<h3>All</h3>";
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        //echo "<table>";
+        //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
+                </div>
+                <div class="w3-container">
+                    <p><?php echo $baris['info_detail'];?></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p><button class="w3-padding-large tombolKonten w3-border" name="<?php echo $baris['id'];?>" ><b>Detail</b></button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-            <td><?php echo $baris['judul'];?></td>
-            <td><?php echo $baris['pengarang'];?></td>
-            <td><?php echo $baris['kategori'];?></td>
-            <td><?php echo $baris['bahasa'];?></td>
-            <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
-            <td><button name="<?php echo $baris['id'];?>" >Detail</button></td>
-            </tr>
             <script>
                 $("[name=<?php echo $baris['id']?>]").click(function(){
                     $.ajax({
@@ -744,7 +753,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        //echo "</table>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -773,14 +782,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
 
-        <button id='previous'>previous</button> 
+        <button id='previous' class='tombolKonten'>previous</button> 
         <?php 
         if($last_page != 1) {
             if($page > 1) {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
                             $("[name=<?php echo $i;?>]").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
@@ -804,7 +813,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-blue' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
                     $("[name=<?php echo $i;?>]").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
@@ -827,7 +836,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         
         ?> 
-        <button id='next'>next</button> 
+        <button id='next' class='tombolKonten'>next</button> 
         
         
         
