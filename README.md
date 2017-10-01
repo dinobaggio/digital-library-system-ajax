@@ -1,7 +1,7 @@
 # digital-library-system-ajax
 Ajax Digital Libray System
 
-#Installation
+# Installation
 create database 'digital_library_system_belajar',
 
 On your database, open a SQL terminal paste this and execute:
@@ -64,7 +64,7 @@ ALTER TABLE `upload`
 
 or you can use file digital_library_system_belajar.sql, and import to your database ...
 
-#Login
+# Login
 
 username : admin, password : admin
 
