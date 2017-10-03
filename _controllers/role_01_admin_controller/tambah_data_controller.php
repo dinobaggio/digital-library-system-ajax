@@ -136,11 +136,6 @@ $info_detail = $_POST['info_detail'];
 
 }
 
-
-
-
-
-
 ?>
 
 

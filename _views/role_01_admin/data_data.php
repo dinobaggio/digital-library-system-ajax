@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $cari = '';
     }
 
+
+/* EBOOKTAB */
+
     if($_POST['data'] == 'ebook') { ?>
 
 <script>
@@ -53,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari !='') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
-                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%' OR kategori='ebook' AND nama_file LIKE '%$cari%'";
             } else {
                 //$que = "SELECT * FROM data_lampiran";
                 $que = "SELECT * FROM data_lampiran WHERE kategori='ebook'";
@@ -85,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari != '') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
-                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' AND judul LIKE '%$cari%' OR kategori='ebook' AND nama_file LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
             } else {
                 //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
                 $que = "SELECT * FROM data_lampiran WHERE kategori='ebook' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
@@ -221,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <?php
     }
 
-
+/* JURNALTAB */
 
     if($_POST['data'] == 'jurnal') { ?>
 
@@ -258,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari !='') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
-                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%' OR kategori='jurnal' AND nama_file LIKE '%$cari%'";
             } else {
                 //$que = "SELECT * FROM data_lampiran";
                 $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal'";
@@ -290,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari != '') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
-                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' AND judul LIKE '%$cari%' OR kategori='jurnal' AND nama_file LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
             } else {
                 //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
                 $que = "SELECT * FROM data_lampiran WHERE kategori='jurnal' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
@@ -426,7 +429,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <?php
     }
 
-
+/* ARTIKELTAB */
 
     if($_POST['data'] == 'artikel') { ?>
 
@@ -463,7 +466,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari !='') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
-                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%' OR kategori='artikel' AND nama_file LIKE '%$cari%'";
             } else {
                 //$que = "SELECT * FROM data_lampiran";
                 $que = "SELECT * FROM data_lampiran WHERE kategori='artikel'";
@@ -495,7 +498,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari != '') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
-                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' AND judul LIKE '%$cari%' OR kategori='artikel' AND nama_file LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
             } else {
                 //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
                 $que = "SELECT * FROM data_lampiran WHERE kategori='artikel' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
@@ -667,7 +670,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari !='') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
-                $que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%'";
+                $que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' OR nama_file LIKE '%$cari%'";
             } else {
                 //$que = "SELECT * FROM data_lampiran";
                 $que = "SELECT * FROM data_lampiran";
@@ -699,7 +702,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $cari = $cari['cari'];
             if ($cari != '') {
                 //$que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
-                $que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
+                $que = "SELECT * FROM data_lampiran WHERE judul LIKE '%$cari%' OR nama_file LIKE '%$cari%' LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
             } else {
                 //$que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
                 $que = "SELECT * FROM data_lampiran LIMIT ".($page - 1) * $banyak_page.", ".$banyak_page;
