@@ -100,8 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<div class='w3-responsive' style='width:99%'>";
+        echo "<table class='w3-table w3-container' >";
+        echo "<tr class='w3-black w3-opacity'><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -110,9 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['kategori'];?></td>
             <td><?php echo $baris['bahasa'];?></td>
             <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
             <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
@@ -134,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        echo "</table> <br/>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -219,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?> 
         <button id='next' class='tombolKonten'>next</button> 
         
-        
+        </div>
         
         <?php
     }
@@ -305,8 +303,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<div class='w3-responsive' style='width:99%'>";
+        echo "<table class='w3-table w3-container' >";
+        echo "<tr class='w3-black w3-opacity'><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -315,9 +314,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['kategori'];?></td>
             <td><?php echo $baris['bahasa'];?></td>
             <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
             <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
@@ -339,7 +335,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        echo "</table> <br/>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -424,7 +420,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?> 
         <button id='next' class='tombolKonten'>next</button> 
         
-        
+        </div>
         
         <?php
     }
@@ -510,8 +506,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<div class='w3-responsive' style='width:99%'>";
+        echo "<table class='w3-table w3-container' >";
+        echo "<tr class='w3-black w3-opacity'><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -520,9 +517,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['kategori'];?></td>
             <td><?php echo $baris['bahasa'];?></td>
             <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
             <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
@@ -544,7 +538,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        echo "</table> <br/>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -629,7 +623,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?> 
         <button id='next' class='tombolKonten'>next</button> 
         
-        
+        </div>
         
         <?php
     }
@@ -714,8 +708,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $tugas = $kon->query($que);
         unset($fileDb);
         unset($kon);
-        echo "<table>";
-        echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
+        echo "<div class='w3-responsive' style='width:99%'>";
+        echo "<table class='w3-table w3-container' >";
+        echo "<tr class='w3-black w3-opacity'><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Bahasa</th><th>Penerbit</th><th>Detail</th></tr>";
         while($baris = $tugas->fetch()) { ?>
 
             <tr>
@@ -724,9 +719,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <td><?php echo $baris['kategori'];?></td>
             <td><?php echo $baris['bahasa'];?></td>
             <td><?php echo $baris['penerbit'];?></td>
-            <td><?php echo $baris['tahun_penerbit'];?></td>
-            <td><?php echo $baris['tempat_penerbit'];?></td>
-            <td><?php echo $baris['info_detail'];?></td>
             <td><button name="<?php echo $baris['id'];?>" class='tombolKonten'>Detail</button></td>
             </tr>
             <script>
@@ -748,7 +740,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
     <?php    }
 
-        echo "</table>"; ?>
+        echo "</table> <br/>"; ?>
         
         <script>
             $(document).ready(function(){
@@ -833,7 +825,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?> 
         <button id='next' class='tombolKonten'>next</button> 
         
-        
+        </div>
         
         <?php
     }
