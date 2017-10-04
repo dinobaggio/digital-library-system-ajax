@@ -102,10 +102,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<h3>E-Book</h3>";
         //echo "<table>";
         //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
-        while($baris = $tugas->fetch()) { ?>
+        while($baris = $tugas->fetch()) { 
+            $nama_file = explode(".", $baris['nama_file']);
+            unset($nama_file[count($nama_file)-1]);
+            $nama_file = implode(".",$nama_file);
+            ?>
             <div class="w3-card-4 w3-margin w3-white">
                 <div class="w3-container">
                     <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <img class="w3-round w3-card-4" src="upload/imgcilik/<?php echo $nama_file;?>.jpg"  width="200" height="225" />
                     <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
                 </div>
                 <div class="w3-container">
@@ -310,10 +315,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<h3>Jurnal</h3>";
         //echo "<table>";
         //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
-        while($baris = $tugas->fetch()) { ?>
+        while($baris = $tugas->fetch()) { 
+            $nama_file = explode(".", $baris['nama_file']);
+            unset($nama_file[count($nama_file)-1]);
+            $nama_file = implode(".",$nama_file);
+            ?>
             <div class="w3-card-4 w3-margin w3-white">
                 <div class="w3-container">
                     <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <img class="w3-round w3-card-4" src="upload/imgcilik/<?php echo $nama_file;?>.jpg"  width="200" height="225" />
                     <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
                 </div>
                 <div class="w3-container">
@@ -518,10 +528,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<h3>Artikel</h3>";
         //echo "<table>";
         //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
-        while($baris = $tugas->fetch()) { ?>
+        while($baris = $tugas->fetch()) { 
+            $nama_file = explode(".", $baris['nama_file']);
+            unset($nama_file[count($nama_file)-1]);
+            $nama_file = implode(".",$nama_file);
+            ?>
             <div class="w3-card-4 w3-margin w3-white">
                 <div class="w3-container">
                     <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <img class="w3-round w3-card-4" src="upload/imgcilik/<?php echo $nama_file;?>.jpg"  width="200" height="225" />
                     <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
                 </div>
                 <div class="w3-container">
@@ -725,10 +740,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<h3>All</h3>";
         //echo "<table>";
         //echo "<tr><th>Judul</th><th>Pengarang</th><th>Kategori</th><th>Penerbit</th><th>Tahun Penerbit</th><th>Tempat Penerbit</th><th>Info Lain</th><th>Detail</th></tr>";
-        while($baris = $tugas->fetch()) { ?>
+        while($baris = $tugas->fetch()) { 
+            $nama_file = explode(".", $baris['nama_file']);
+            unset($nama_file[count($nama_file)-1]);
+            $nama_file = implode(".",$nama_file);
+            ?>
             <div class="w3-card-4 w3-margin w3-white">
                 <div class="w3-container">
                     <h3><b><?php echo $baris['judul'];?></b></h3>
+                    <img class="w3-round w3-card-4" src="upload/imgcilik/<?php echo $nama_file;?>.jpg"  width="200" height="225" />
                     <h5><b>pengarang:</b> <?php echo $baris['pengarang'];?> <br/><b>kategori:</b> <?php echo $baris['kategori'];?></h5>
                 </div>
                 <div class="w3-container">

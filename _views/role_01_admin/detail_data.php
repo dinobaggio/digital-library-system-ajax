@@ -10,6 +10,9 @@ if(isset($_POST['id'])) {
         $data = $tugas->fetch(); 
         $nama_file = $data['nama_file'];
         $id_upload = $data['id_upload'];
+        $imgcilik = explode(".", $data['nama_file']);
+        unset($imgcilik[count($imgcilik)-1]);
+        $imgcilik = implode(".",$imgcilik);
         ?>
     <script src="_asset/js/jquery-3.2.1.js"></script>
 
@@ -19,9 +22,13 @@ if(isset($_POST['id'])) {
     </div>
 
     <div class="w3-container w3-padding w3-white" >
+    <span id='tutup' class="w3-button w3-right" style='display:none;'><i class="fa fa-remove" ></i></span>
     <div class="w3-center">
-    <iframe src="upload/<?php echo $nama_file;?>#zoom=80" class='data' style="display:none;height:600px;width:80%"></iframe>
-    </div><br/><br/>
+        <iframe src="upload/<?php echo $nama_file;?>#zoom=80" class='data' style="display:none;height:600px;width:80%"></iframe>
+    </div>
+    <div class='w3-center '>
+            <img class="w3-round w3-card-4 w3-button" style='padding:0;' src="upload/imgcilik/<?php echo $imgcilik;?>.jpg" id='imgcilik' width="200" height="225" />
+    </div>
         <p>Pengarang : <?php echo $data['pengarang'];?></p>
         <p>Kategori : <?php echo $data['kategori'];?></p>
         <p>Bahasa : <?php echo $data['bahasa'];?></p>
@@ -38,6 +45,18 @@ if(isset($_POST['id'])) {
     $(document).ready(function(){
         $("button#lihat").click(function(){
             $("iframe.data").toggle('slow');
+            $("#imgcilik").toggle('slow');
+            $("#tutup").toggle('slow');
+        });
+        $("#tutup").click(function(){
+            $("iframe.data").toggle('slow');
+            $("#imgcilik").toggle('slow');
+            $(this).toggle('slow');
+        });
+        $("#imgcilik").click(function(){
+            $("iframe.data").toggle('slow');
+            $(this).toggle('slow');
+            $("#tutup").toggle('slow');
         });
         $("button#download").click(function(){
             window.open("_views/role_01_admin/download_pdf.php?file=<?php echo $nama_file;?>");

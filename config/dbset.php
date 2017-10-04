@@ -12,6 +12,24 @@ try {
     echo "error: ".$e->getMessage();
 }
 
+
+
+
+
+function cekIdUpload($table, $kolom) {
+    global $kon;
+    $string = randomString(5);
+    $que = "SELECT $kolom FROM $table WHERE $kolom='$string'";
+    $tugas = $kon->prepare($que);
+    $tugas->execute();
+    $cek = $tugas->rowCount();
+    if($cek == 0) {
+        return $string;
+    } else {
+        return 1;
+    }
+}
+
 ?>
 
 

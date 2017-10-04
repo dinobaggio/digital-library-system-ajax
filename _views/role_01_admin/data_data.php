@@ -776,9 +776,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 for($i = $page-2; $i < $page; $i++) {
                     if($i > 0) {
                         ?>
-                            <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                            <button class='w3-button w3-gray' id="page<?php echo $i;?>"><?php echo $i; ?></button>
                             <script>
-                            $("[name=<?php echo $i;?>]").click(function(){
+                            $("#page<?php echo $i;?>").click(function(){
                                 var cari = "cari=<?php echo $cari;?>";
                                 $.ajax({
                                     url:'_views/role_01_admin/data_data.php',
@@ -800,9 +800,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php
             for($i = $page+1; $i <= $last_page; $i++) {
                 ?>
-                <button class='w3-button w3-gray' name="<?php echo $i;?>"><?php echo $i; ?></button>
+                <button class='w3-button w3-gray' id="page<?php echo $i;?>"><?php echo $i; ?></button>
                 <script>
-                    $("[name=<?php echo $i;?>]").click(function(){
+                    $("#page<?php echo $i;?>").click(function(){
                         var cari = "cari=<?php echo $cari;?>";
                         $.ajax({
                             url:'_views/role_01_admin/data_data.php',
