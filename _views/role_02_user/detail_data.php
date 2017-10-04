@@ -34,7 +34,6 @@ if(isset($_POST['id'])) {
         <p>Penerbit : <?php echo $data['penerbit'] ?></p>
         <p>Tahun Penerbit : <?php echo $data['tahun_penerbit'];?></p>
         <p>Tempat Penerbit: <?php echo $data['tempat_penerbit'];?></p>
-        <p>Info Lainnya : <?php echo $data['info_detail'];?></p>
         <p id="lihatPdf" style="display:none"></p>
         <p id='pDownload' style="display:none"></p>
     </div>

@@ -87,7 +87,6 @@ $info_detail = $_POST['info_detail'];
         $tmpName = $_FILES["lampiran_berkas"]["tmp_name"];
         $fileType = $_FILES["lampiran_berkas"]["type"];
 
-        echo "<script>$('#divData').hide();</script>";
         echo "<script>$('#loadingGambar').show();</script>";
         if($fileSize > 500000000 ) {
             $errFile = "*file tidak boleh lebih dari 500Mb";
@@ -392,8 +391,9 @@ function randomString($length = 10) {
             <tr><td><input type="submit" value="Simpan"></td><td><span class='error'><?php echo $errId_upload;?></span></td></tr>
         </table>
     </form>
+    <img src='_asset/gambar/loading.gif' class='w3-opacity-min' id='loadingGambar' width='510' height='510' style='display:none;position:absolute;top:0px;' />
 </div>
-<img src='_asset/gambar/loading.gif' class='' id='loadingGambar' width='500' height='400' style='display:none' />
+
 
 <script> // SCRIPT JS SEKURITI TINGKAT TINGGI!!!!!
     if (document.getElementById("indexAjax") == null) {

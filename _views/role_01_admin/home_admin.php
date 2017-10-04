@@ -78,7 +78,7 @@ var openInbox = document.getElementById("myBtn");
         openInbox.click();
 </script>
 
-<div class="w3-main w3-animate-right" style="margin-left:243px;">
+<div class="w3-main w3-animate-right" style="margin-left:260px;">
 <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
 <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'" style="display:none;"><i class="fa fa-pencil"></i></a>
 <div class='w3-container w3-padding-16 w3-indigo'><h1>Selamat datang <?php echo $_SESSION['username'];?></h1></div>
