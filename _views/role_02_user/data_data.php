@@ -155,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
@@ -166,6 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
             });
         </script>
@@ -189,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         $("#indexData").html(data);
                                     }
                                 });
+                                window.scrollTo(0, 0);
                             });
                         </script>
                         <?php
@@ -213,6 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $("#indexData").html(data);
                             }
                         });
+                        window.scrollTo(0, 0);
                     });
                 </script>
                 <?php
@@ -368,6 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
@@ -379,6 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
             });
         </script>
@@ -402,6 +408,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         $("#indexData").html(data);
                                     }
                                 });
+                                window.scrollTo(0, 0);
                             });
                         </script>
                         <?php
@@ -426,6 +433,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $("#indexData").html(data);
                             }
                         });
+                        window.scrollTo(0, 0);
                     });
                 </script>
                 <?php
@@ -581,6 +589,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
@@ -592,6 +601,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
             });
         </script>
@@ -615,6 +625,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         $("#indexData").html(data);
                                     }
                                 });
+                                window.scrollTo(0, 0);
                             });
                         </script>
                         <?php
@@ -639,6 +650,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $("#indexData").html(data);
                             }
                         });
+                        window.scrollTo(0, 0);
                     });
                 </script>
                 <?php
@@ -793,6 +805,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
                 $("#previous").click(function(){
                     var cari = "cari=<?php echo $cari;?>";
@@ -804,6 +817,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $("#indexData").html(data);
                         }
                     });
+                    window.scrollTo(0, 0);
                 });
             });
         </script>
@@ -827,6 +841,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         $("#indexData").html(data);
                                     }
                                 });
+                                window.scrollTo(0, 0);
                             });
                         </script>
                         <?php
@@ -851,6 +866,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $("#indexData").html(data);
                             }
                         });
+                        window.scrollTo(0, 0);
                     });
                 </script>
                 <?php

@@ -1,6 +1,12 @@
 # digital-library-system-ajax
 Ajax Digital Libray System
 
+# Requirement
+
+- ImageMagick 
+
+- Ghostscript
+
 # Installation
 create database 'digital_library_system_belajar',
 

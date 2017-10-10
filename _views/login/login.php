@@ -13,6 +13,7 @@ $(document).ready(function(){
        $.ajax({
            url:'_views/login/login.php',
            method: 'POST',
+           cache: false,
            data: { data: $(this).serialize() },
            success: function(data){
                $("#indexAjax").html(data);
