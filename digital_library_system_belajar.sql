@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2018 at 08:33 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.0.27
+-- Generation Time: Apr 30, 2018 at 03:28 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -32,7 +30,7 @@ CREATE TABLE `data_lampiran` (
   `id` int(11) NOT NULL,
   `judul` varchar(500) NOT NULL,
   `pengarang` varchar(200) DEFAULT NULL,
-  `kategori` set('ebook','jurnal','artikel') NOT NULL,
+  `kategori` set('ebook','jurnal','artikel','skripsi') NOT NULL,
   `bahasa` varchar(20) DEFAULT NULL,
   `penerbit` varchar(50) DEFAULT NULL,
   `tahun_penerbit` year(4) DEFAULT NULL,
@@ -81,11 +79,9 @@ INSERT INTO `pengguna` (`username`, `password`, `role`, `full_nama`) VALUES
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', ''),
 ('dino', 'b246ff693d453c3b1a3049752da2bc75', 'user', ''),
 ('dosen', 'ce28eed1511f631af6b2a7bb0a85d636', 'dosen', ''),
-('dosen2', 'ac41c4e0e6ef7ac51f0c8f3895f82ce5', 'dosen', ''),
-('dosen3', '1192feff42fadff1d7e0aa1210fed1e3', 'dosen', 'Dosen Tiga'),
 ('user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', ''),
 ('user1', '24c9e15e52afc47c225b757e7bee1f9d', 'user', ''),
-('user2', '7e58d63b60197ceb55a1c487989a3720', 'user', ''),
+('user2', '7e58d63b60197ceb55a1c487989a3720', 'user', 'user dua'),
 ('user3', '92877af70a45fd6a2ed7fe81e1236b78', 'user', 'User Tiga');
 
 -- --------------------------------------------------------
@@ -97,19 +93,6 @@ INSERT INTO `pengguna` (`username`, `password`, `role`, `full_nama`) VALUES
 CREATE TABLE `skripsi_user` (
   `id_upload` varchar(11) NOT NULL,
   `id_user` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `upload`
---
-
-CREATE TABLE `upload` (
-  `id` int(11) NOT NULL,
-  `nama_file` varchar(500) DEFAULT NULL,
-  `file_size` int(11) DEFAULT NULL,
-  `file_type` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -142,16 +125,22 @@ ALTER TABLE `data_lampiran`
   ADD UNIQUE KEY `id_upload` (`id_upload`);
 
 --
+-- Indexes for table `jurnal_dosen`
+--
+ALTER TABLE `jurnal_dosen`
+  ADD PRIMARY KEY (`id_jurnal`);
+
+--
 -- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `upload`
+-- Indexes for table `upload_skripsi`
 --
-ALTER TABLE `upload`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `upload_skripsi`
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -162,14 +151,6 @@ ALTER TABLE `upload`
 --
 ALTER TABLE `data_lampiran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `upload`
---
-ALTER TABLE `upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

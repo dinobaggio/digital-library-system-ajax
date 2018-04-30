@@ -4,9 +4,22 @@
         <title>Digital Library By Dino</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <noscript>
+            <p>website ini membutuhkan javascript, nyalakan javascript anda</p>
+        </noscript>
+        <style>
+        @media print
+        {
+        iframe {display:none;}
+        body {display: none;}
+        }
+        </style>
+
         <link href="_asset/css/w3css.css" rel="stylesheet" />
         <link href="_asset/css/font_awesome/css/font-awesome.css" rel="stylesheet" />
         <script src="_asset/js/jquery-3.2.1.js"></script>
+        <script src='_asset/js/jspdf.debug.js'></script>
+        <script src='_asset/js/html2pdf.js'></script>
         <script>
             $(document).ready(function(){
                 $("#dinobaggio").click(function(){
@@ -22,7 +35,9 @@
     <div id="indexAjax"> 
         <!-- proses seluruh aplikasi disini -->
         <script>
-            $("#indexAjax").load('_views/login/login.php');
+            $("body").removeClass("w3-teal");
+            $("body").addClass("w3-brown");
+            $("#indexAjax").load('_views/role_04_non_user/home_non_user.php');
         </script>
     </div>
 

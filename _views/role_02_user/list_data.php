@@ -1,4 +1,44 @@
 <script src="_asset/js/public.js"></script>
+
+<?php
+session_start();
+
+if(!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
+    session_destroy();
+    //echo "<script>window.location = '../../index.php'</script>";
+    ?> 
+    
+    <script>
+        if (document.getElementById("indexAjax") == null ){
+            window.location = '';
+        } else {
+            window.location = '';
+        }
+    </script>
+    
+    
+    <?php
+} else { 
+
+if($_SESSION['role'] != 'user') {
+    session_destroy(); ?> <script>window.location = '';</script> <?php
+}
+
+?>
+    
+    <script>
+        if(document.getElementById("indexAjax") == null) {
+            window.location = '';
+        }
+    </script>
+
+    <?php
+}
+
+?>
+
+
+
 <script>
 
 $(document).ready(function(){
@@ -38,6 +78,17 @@ $(document).ready(function(){
             url : '_views/role_02_user/data_data.php',
             method : 'post',
             data : {data : 'artikel', page : '1' },
+            success : function(data){
+                $("#indexData").html(data);
+            }
+        });
+    });
+
+    $("#btnSkripsi").click(function(){
+        $.ajax({
+            url : '_views/role_02_user/data_data.php',
+            method : 'post',
+            data : {data : 'skripsi', page : '1' },
             success : function(data){
                 $("#indexData").html(data);
             }

@@ -1,4 +1,42 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
+    session_destroy();
+    //echo "<script>window.location = '../../index.php'</script>";
+    ?> 
+    
+    <script>
+        if (document.getElementById("indexAjax") == null ){
+            window.location = '';
+        } else {
+            window.location = '';
+        }
+    </script>
+    
+    
+    <?php
+} else { 
+
+if($_SESSION['role'] != 'admin') {
+    session_destroy(); ?> <script>window.location = '';</script> <?php
+}
+
+?>
+    
+    <script>
+        if(document.getElementById("indexAjax") == null) {
+            window.location = '';
+        }
+    </script>
+
+    <?php
+}
+
+?>
+
+
+<?php
 header("Content-Type: application/octet-stream");
 
 $file = '../../upload/'.$_GET["file"];

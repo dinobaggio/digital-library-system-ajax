@@ -1,5 +1,44 @@
-<?php
 
+<?php
+session_start();
+
+if(!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
+    session_destroy();
+    //echo "<script>window.location = '../../index.php'</script>";
+    ?> 
+    
+    <script>
+        if (document.getElementById("indexAjax") == null ){
+            window.location = '';
+        } else {
+            window.location = '';
+        }
+    </script>
+    
+    
+    <?php
+} else { 
+
+if($_SESSION['role'] != 'admin') {
+    session_destroy(); ?> <script>window.location = '';</script> <?php
+}
+
+?>
+    
+    <script>
+        if(document.getElementById("indexAjax") == null) {
+            window.location = '';
+        }
+    </script>
+
+    <?php
+}
+
+?>
+
+
+<?php
+date_default_timezone_set("Asia/Bangkok");
 
 
 {
@@ -15,8 +54,15 @@
     $ebook = '';
     $jurnal = '';
     $artikel = '';
+    $kategori = '';
 
     $status = 0;
+
+    $errBatas = '';
+    $batasan = '';
+
+    $errAbstrak = '';
+    $abstrak = '';
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -30,7 +76,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     if($cek_id == 0) {
         $errId_upload = '';
     } else {
-        $errId_upload = 'Error ID Upload silahkan isi kembali form';
+        $errId_upload = 'file sudah terupload dengan id = '.$id_upload;
+        $fileDb = null;
+        $kon = null;
+        $judul = "";
+        $kategoriDefault = 'selected';
+        $ebook = '';
+        $jurnal = '';
+        $artikel = '';
+        $batasan = '';
+        echo "<script>$('#katBatas').hide();</script>";
+        echo "<script>$('#loadingGambar').hide();</script>";
+        echo "<script>$('#tungguSebentar').hide();</script>";
     }
     $loadDb = null;
 
@@ -73,6 +130,13 @@ if(empty($_POST['kategori'])) {
     }
 }
 
+if(empty($_POST['batasan'])) {
+    $errBatas = "*batasan ebook untuk non user harus disi";
+} else {
+    $errBatas = '';
+}
+
+
 $kategori = $_POST['kategori'];
 $pengarang = $_POST['pengarang'];
 $bahasa = $_POST['bahasa'];
@@ -80,249 +144,177 @@ $penerbit = $_POST['penerbit'];
 $tahun_penerbit = $_POST['tahun_penerbit'];
 $tempat_penerbit = $_POST['tempat_penerbit'];
 $info_detail = $_POST['info_detail'];
+$batasan = $_POST['batasan'];
+$abstrak = $_POST['abstrak'];
+$tgl_upload = Date("Y-m-d H:i:s");
 
-    if($_FILES['lampiran_berkas']['size'] > 0){
-        $fileSize = $_FILES['lampiran_berkas']['size'];
-        $fileName = $_FILES['lampiran_berkas']['name'];
-        $tmpName = $_FILES["lampiran_berkas"]["tmp_name"];
-        $fileType = $_FILES["lampiran_berkas"]["type"];
-
-        echo "<script>$('#loadingGambar').show();</script>";
-        if($fileSize > 500000000 ) {
-            $errFile = "*file tidak boleh lebih dari 500Mb";
-        } else {
-            /* $fp = fopen($tmpName, "r");
-            $content = fread($fp, filesize($tmpName));
-            $content = addslashes($content);
-            fclose($fp); */
-            
-            //$tempat_upload = "";
-
-        }
-    } else {
-        $errFile = "*File harus dipilih";
+if ($kategori == 'jurnal') {
+    if (empty($abstrak)) {
+        $errAbstrak = "*abstrak harus diisi";
     }
-
+}
 
     if($judul != '' && 
     $kategori != '' && 
-    $errFile == '' &&
-    $errId_upload == '') {
+    $errId_upload == '' &&
+    $errBatas == '' && 
+    $errAbstrak == '') {
+        try {
+            if($_FILES['lampiran_berkas']['size'] > 0){
+                $fileSize = $_FILES['lampiran_berkas']['size'];
+                $fileName = $_FILES['lampiran_berkas']['name'];
+                $tmpName = $_FILES["lampiran_berkas"]["tmp_name"];
+                $fileType = $_FILES["lampiran_berkas"]["type"];
+                if($fileSize > 500000000 ) {
+                    $errFile = "*file tidak boleh lebih dari 500Mb";
+                } else {
+                    $errFile = '';
 
-       try {
-            $fileDb = require_once('../../config/dbset.php');
-            
-            $tempat_upload = "../../upload/".$id_upload."_".$kategori."_".$fileName;
-            $nama_file = $id_upload."_".$kategori."_".$fileName;
-            $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit, tahun_penerbit, tempat_penerbit, info_detail, nama_file, id_upload)
-            VALUES (:judul, :pengarang, :kategori, :bahasa, :penerbit, :tahun_penerbit, :tempat_penerbit, :info_detail, :nama_file, :id_upload)";
-            $tugas = $kon->prepare($que);
-            $tugas->bindParam(':judul', $judul);
-            $tugas->bindParam(':pengarang', $pengarang);
-            $tugas->bindParam(':kategori', $kategori);
-            $tugas->bindParam(':bahasa', $bahasa);
-            $tugas->bindParam(':penerbit', $penerbit);
-            $tugas->bindParam(':tahun_penerbit', $tahun_penerbit);
-            $tugas->bindParam(':tempat_penerbit', $tempat_penerbit);
-            $tugas->bindParam(':info_detail', $info_detail);
-            $tugas->bindParam(':nama_file', $nama_file);
-            $tugas->bindParam(':id_upload', $id_upload);
-            if($tugas->execute()){
-                $id_lampiran = $kon->lastInsertId();
-                $moved = move_uploaded_file($tmpName, $tempat_upload);
-                if ($moved) {
-                    $file = $nama_file."[0]";
-                    $target = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/$file";
-                    $im = new imagick($target); 
-                    $im->setImageColorspace(255); 
-                    $im->setResolution(300, 300);
-                    $im->setCompressionQuality(95); 
-                    $im->setImageFormat('jpeg');
+                }
+            } else {
+                $errFile = "*File harus dipilih";
+            }
 
-                    
-                    $nama_file = explode(".", $nama_file);
-                    unset($nama_file[count($nama_file)-1]);
-                    $nama_file = implode(".",$nama_file);
+            if ($errFile == '') {
+                $fileDb = require_once('../../config/dbset.php');
+                $nama_file = $id_upload."_".$kategori."_".$fileName;
+                $nama_file = explode(".", $nama_file);
+                unset($nama_file[count($nama_file)-1]);
+                $nama_file = implode(".",$nama_file);
+                $nama_file = sepasiBerlebih($nama_file);
+                $sandbox_upload = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/tempo_file/$nama_file";
+                $tempat_upload = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/ebook/$nama_file";
+                $rm_folder_file = $sandbox_upload;
+                
+                if (!file_exists($sandbox_upload)) {
+                    mkdir($sandbox_upload, 0777, true);
+                }
 
-                    $file = $nama_file.".jpg";
-                    $target = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/imgcilik/$file";
-                    $imgcilik = $im->writeImage($target);
-                    
-                    if($imgcilik) {
-                        $im->clear(); 
-                        $im->destroy();
-                        echo "<script>$('#indexAdmin').load('_views/role_01_admin/detail_data.php', {id:$id_lampiran});</script>";
-                        $fileDb = null;
-                        $kon = null;
-                        $judul = "";
-                        $kategoriDefault = 'selected';
-                        $ebook = '';
-                        $jurnal = '';
-                        $artikel = '';
+                if (!file_exists($tempat_upload)) {
+                    mkdir($tempat_upload, 0777, true);
+                }
+
+                $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit, tahun_penerbit, tempat_penerbit, info_detail, abstrak, nama_file, id_upload, tgl_upload)
+                VALUES (:judul, :pengarang, :kategori, :bahasa, :penerbit, :tahun_penerbit, :tempat_penerbit, :info_detail, :abstrak, :nama_file, :id_upload, :tgl_upload)";
+                $tugas = $kon->prepare($que);
+                $tugas->bindParam(':judul', $judul);
+                $tugas->bindParam(':pengarang', $pengarang);
+                $tugas->bindParam(':kategori', $kategori);
+                $tugas->bindParam(':bahasa', $bahasa);
+                $tugas->bindParam(':penerbit', $penerbit);
+                $tugas->bindParam(':tahun_penerbit', $tahun_penerbit);
+                $tugas->bindParam(':tempat_penerbit', $tempat_penerbit);
+                $tugas->bindParam(':info_detail', $info_detail);
+                $tugas->bindParam(':nama_file', $nama_file);
+                $tugas->bindParam(':id_upload', $id_upload);
+                $tugas->bindParam(':tgl_upload', $tgl_upload);
+                $tugas->bindParam(':abstrak', $abstrak);
+                if($tugas->execute()){
+                    $id_lampiran = $kon->lastInsertId();
+                    $tempat_upload = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/ebook/$nama_file/full_pdf.pdf";
+                    $moved = move_uploaded_file($tmpName, $tempat_upload);
+                    if ($moved) {
+                        $target = $tempat_upload."[0]";
+                        $im = new imagick($target); 
+                        $im->setImageColorspace(255); 
+                        $im->setResolution(300, 300);
+                        $im->setCompressionQuality(95); 
+                        $im->setImageFormat('jpeg');
+
+                        $file = $nama_file.".jpeg";
+                        $target = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/imgcilik/$file";
+                        $imgcilik = $im->writeImage($target);
+                        
+                        if($imgcilik) {
+                            for($i = 0; $i < $batasan; $i++) {
+                                $file = "full_pdf.pdf[$i]";
+                                $target = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/ebook/$nama_file/$file";
+                                $im = new imagick($target);
+                                $im->setImageColorspace(255); 
+                                $im->setResolution(300, 300);
+                                $im->setCompressionQuality(0);
+                                $im->setImageFormat('jpeg');
+
+                                $file = "$i.jpeg";
+                                $target = $_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/tempo_file/$nama_file/$file";
+                                $imgcilik = $im->writeImage($target);
+                                if ($imgcilik) {
+                                    echo "<script>console.log('gambar ($i+1) berhasil dibuat')</script>";
+                                    
+                                } else {
+                                    echo "<script>console.log('gagal membuat gambar ($i+1)')</script>";
+                                }
+                            }
+                            // akhir for
+                            
+                            $im->clear(); 
+                            $im->destroy();
+                            $images = [];
+                            for($i = 0; $i < $batasan; $i++) {
+                                $images[$i] = $rm_folder_file."/$i.jpeg";
+                            } 
+                            //print_r($images);
+
+                            $pdf = new Imagick($images);
+                            $pdf->setImageFormat('pdf');
+                            if (!$pdf->writeImages($_SERVER['DOCUMENT_ROOT']."/digital-library-system-ajax/upload/ebook/$nama_file/non_user.pdf", true)) {
+                                    die('Could not write!');
+                            }
+                            $pdf->clear();
+                            $pdf->destroy();
+
+                            array_map('unlink', glob($rm_folder_file."/*.*"));
+                            rmdir($rm_folder_file); 
+                            $tmpt_upload = "upload/ebook/$nama_file";
+                            ?> <script>
+                            alert('upload sukses dengan id : <?php echo $id_upload?>');
+                            window.open('v_qrcode.php?id_upload=<?= $id_upload ?>', '_blank')
+                            var abstrak = '<?php echo $abstrak?>';
+                            var tmpt_upload = '<?php echo $tmpt_upload?>';
+                            
+                            if (abstrak != '') {
+                                $.ajax({
+                                    url:'_views/role_01_admin/abstrak_pdf.php',
+                                    method:'POST',
+                                    data : { textPdf:abstrak, tmpt_upload:tmpt_upload }
+                                }).done(function(data){
+                                    console.log('loading abstark2');
+                                    $("#resultAbstrak").html(data);
+                                    
+                                }); 
+                            } else {
+                                $("#indexAdmin").load('_views/role_01_admin/tambah_data.php');
+                            }
+                            
+                            </script> <?php
+                        } else {
+                            echo "<script>$('#indexAdmin').html('Error data tidak teruploads');</script>";
+                            $fileDb = null;
+                            $kon = null;
+                            unset($fileDb);
+                            unset($kon);
+                        }
                         
                     } else {
-                        echo "<script>$('#indexAdmin').html('Error data tidak teruploads');</script>";
+                        echo "<script>$('#indexAdmin').html('Error data tidak terupload');</script>";
                         $fileDb = null;
                         $kon = null;
                         unset($fileDb);
                         unset($kon);
                     }
-                    
                 } else {
-                    echo "<script>$('#indexAdmin').html('Error data tidak terupload');</script>";
+                    echo "<script>$('#indexAdmin').html('Error memasukan data');</script>";
                     $fileDb = null;
                     $kon = null;
                     unset($fileDb);
                     unset($kon);
                 }
-            } else {
-                echo "<script>$('#indexAdmin').html('Error memasukan data');</script>";
-                $fileDb = null;
-                $kon = null;
-                unset($fileDb);
-                unset($kon);
-            }
-    }catch(PDOException $e) {
-        //echo "error : ".$e->getMessage();
-    }
-        
-
-        
-        
-
-
-            /* $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit, tahun_penerbit, tempat_penerbit, info_detail)
-            VALUES (:judul, :pengarang, :kategori, :bahasa, :penerbit, :tahun_penerbit, :tempat_penerbit, :info_detail)";
-            $tugas = $kon->prepare($que);
-            $tugas->bindParam(':judul', $judul);
-            $tugas->bindParam(':pengarang', $pengarang);
-            $tugas->bindParam(':kategori', $kategori);
-            $tugas->bindParam(':bahasa', $bahasa);
-            $tugas->bindParam(':penerbit', $penerbit);
-            $tugas->bindParam(':tahun_penerbit', $tahun_penerbit);
-            $tugas->bindParam(':tempat_penerbit', $tempat_penerbit);
-            $tugas->bindParam(':info_detail', $info_detail);
-            if($tugas->execute()) {
-                $id_lampiran = $kon->lastInsertId();
-                $tempat_upload = "../../upload/ID_".$id_lampiran."_".$kategori."_".$fileName;
-                $nama_file = "ID_".$id_lampiran."_".$kategori."_".$fileName;
-                if(move_uploaded_file($tmpName, $tempat_upload)) {
-                    $que = "INSERT INTO upload (nama_file, file_size, file_type) VALUES (:nama_file, :file_size, :file_type)";
-                    $tugas = $kon->prepare($que);
-                    $tugas->bindParam(':nama_file', $nama_file);
-                    $tugas->bindParam(':file_size', $fileSize );
-                    $tugas->bindParam(':file_type', $fileType);
-                    if($tugas->execute()){
-                        $id_upload = $kon->lastInsertId();
-                        $que = "UPDATE data_lampiran SET nama_file='$nama_file' WHERE id=$id_lampiran";
-                        if($kon->exec($que)) {
-                            $que = "UPDATE data_lampiran SET id_upload='$id_upload' WHERE id=$id_lampiran";
-                            if($kon->exec($que)) {
-                                $status = 1;
-                            }
-                        }
-                        
-                    }
-                    
-
-                } else {
-                    $que = "DELETE FROM data_lampiran WHERE id=$id_lampiran";
-                    $kon->exec($que);
-                    $status = 0;
-                }
-
-            } */
-
-       
-
-
-        /* if ($status == 1) {
-            //echo 'data berhasil msk';
-                {
-                    $errFile = '';
-
-                    $errJudul ='';
-                    $judul = '';
-
-                    $errKategori = '';
-
-                    $kategoriDefault = 'selected';
-                    $ebook = '';
-                    $jurnal = '';
-                    $artikel = '';
-
-                    $status = 0;
-                } */
-                ?> <script> //alert('suskes menambah data!');/* $("#indexAdmin").load('_views/role_01_admin/detail_data.php', { id : "<?php //echo $id_lampiran;?>" })  */ </script> <?php
-            /* } else {
-                echo "gagal upload file";
-            } */
-
-
-
-
-
-         try {
-            /* $que = "INSERT INTO upload (nama_file, file_size, file_type, content) VALUES ('$fileName', '$fileSize', '$fileType', '$content' )";
-            $kon -> exec($que); */
-            /* $que = "INSERT INTO upload (nama_file, file_size, file_type, content) VALUES (:fileName, :fileSize, :fileType, :content)";
-            $tugas = $kon->prepare($que);
-            $tugas->bindParam(':fileName', $fileName);
-            $tugas->bindParam(':fileSize', $fileSize);
-            $tugas->bindParam(':fileType', $fileType);
-            $tugas->bindParam(':content', $content);
-            $tugas->execute(); 
-            $id_upload = $kon->lastInsertId(); */
-
-            /* $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit,
-            tahun_penerbit, tempat_penerbit, info_detail, id_upload) VALUES ('$judul', 
-            '$pengarang', '$kategori', '$bahasa', '$penerbit', '$tahun_penerbit', '$tempat_penerbit', '$info_detail', '$id_upload')"; */
-
-            /* $que = "INSERT INTO data_lampiran (judul, pengarang, kategori, bahasa, penerbit, tahun_penerbit, tempat_penerbit, info_detail)
-            VALUES (:judul, :pengarang, :kategori, :bahasa, :penerbit, :tahun_penerbit, :tempat_penerbit, :info_detail)";
-            $tugas = $kon->prepare($que);
-            $tugas->bindParam(':judul', $judul);
-            $tugas->bindParam(':pengarang', $pengarang);
-            $tugas->bindParam(':kategori', $kategori);
-            $tugas->bindParam(':bahasa', $bahasa);
-            $tugas->bindParam(':penerbit', $penerbit);
-            $tugas->bindParam(':tahun_penerbit', $tahun_penerbit);
-            $tugas->bindParam(':tempat_penerbit', $tempat_penerbit);
-            $tugas->bindParam(':info_detail', $info_detail);
-            $tugas->execute();
-            $id_lampiran = $kon->lastInsertId();
-            $tempat_upload = "../../upload/".$id_lampiran."_".$kategori."_".$fileName;
-            if (move_uploaded_file($tmpName, $tempat_upload)) {
-                $que = "UPDATE data_lampiran SET nama_file=:nama_file WHERE id=$id_lampiran ";
-                $tugas = $kon->prepare($que);
-                $tugas->bindParam(':nama_file', $nama_file);
-                $nama_file = $id_lampiran."_".$kategori."_".$fileName;
-                $tugas->execute();
-                $que = "INSERT INTO upload (nama_file, file_size, file_type) VALUES ('$nama_file', '$fileSize', '$fileType')";
-                $kon->exec($que);
-                $id_upload = $kon->lastInsertId();
-                $que = "UPDATE data_lampiran SET id_upload=:id_upload WHERE id=$id_lampiran ";
-                $tugas = $kon->prepare($que);
-                $tugas->bindParam(':id_upload', $id_upload);
-                $tugas->execute();
-                $status = 1;
                 
-            } else {
-                $que = "DELETE FROM data_lampir WHERE id=$id_lampiran";
-                $kon->exec($que);
-                $status = 0;
-            } */
-            
-            /* $status = 0;
-            if($kon->exec($que)){
-                $status = 1;
-            } else {
-                $status = 0;
-            } */           
-
-        } catch (PDOException $e) {
-            echo "error: ".$e->getMessage();
-        } 
+            }
+                
+        } catch(PDOException $e) {
+            echo "error : ".$e->getMessage();
+        }
     }
 
 }
@@ -344,6 +336,10 @@ function randomString($length = 10) {
 <script>
     $(document).ready(function(){
         $("#formData").submit(function(){
+            $('#loadingGambar').show();
+            $('#tungguSebentar').show();
+            $("#manipulasi").show();
+            $('#katBatas').hide();
             var formData = new FormData(this);
             $.ajax({
                 url : '_views/role_01_admin/tambah_data.php',
@@ -354,14 +350,55 @@ function randomString($length = 10) {
                 data : formData,
                 contentType : false,
                 cache : false,
-                processData : false
+                processData : false,
+                success : function (data) {
+                    $("#indexAdmin").html(data);
+                    formData = null;
+                }
             }).done(function(data){
-                $("#indexAdmin").html(data);
-                formData = null;
+                
             });
         });
 
+        
     });
+
+function selekKategori(value) {
+    if (value == "ebook") {
+        $("#batasan").val("");
+        $("#katBatas").show("slow", function () {
+            var val = $("#batasan").val();
+            console.log(val);
+        });
+        $("#abstrak").hide('slow', function(){
+            $("#isiAbs").val("");
+        });
+    } else if (value == "jurnal") {
+        $("#katBatas").hide("slow", function () {
+            $("#batasan").val("1");
+            var val = $("#batasan").val();
+            console.log(val);
+        });
+        $("#abstrak").show('slow', function(){});
+
+    } else if (value == "artikel") {
+        $("#katBatas").hide('slow', function(){
+            $("#batasan").val("1");
+            var val = $("#batasan").val();
+            console.log(val);
+        });
+        $("#abstrak").hide('slow', function(){
+            $("#isiAbs").val("");
+        });
+    } else {
+        $("#batasan").val("");
+        $("#isiAbs").val("");
+        $("#katBatas").hide("slow");
+        $("#abstrak").hide("slow");
+        console.log($("#batasan").val());
+    }
+}    
+
 
 </script>
 
@@ -370,28 +407,32 @@ function randomString($length = 10) {
     <form method="post"  action="javascript:void(0)" id="formData">
     <span class='error w3-opacity'><b>file yang diperbolehkan hanya pdf saja</b></span>
         <table>
-            <tr><td>Judul: </td><td><input type="text" name="judul" value="" placeholder="Judul ..." /></td><td><span class='error'><?php echo $errJudul;?></span></td></tr>
+            <tr><td>Judul: </td><td><input type="text" name="judul" value="<?php echo $judul ?>" placeholder="Judul ..." /></td><td><span class='error'><?php echo $errJudul;?></span></td></tr>
             <tr><td>kategori: </td><td>
-                <select name="kategori">
+                <select id="kategori" name="kategori" onchange="selekKategori(this.value)">
                     <option value="" <?php echo $kategoriDefault;?> >Masukan Kategori ...</option>
                     <option value="ebook" <?php echo $ebook;?> >E-Book</option>
                     <option value="jurnal" <?php echo $jurnal;?> >Jurnal</option>
                     <option value="artikel" <?php echo $artikel;?> >Artikel</option>
                 </select>
             </td><td><span class='error'><?php echo $errKategori;?></span></td></tr>
+            <tr id="katBatas" style="display:none" ><td>Batasan : </td><td><input id="batasan" name="batasan" type="number" placeholder="Batasan Untuk Non User"></td><td><span class="error"><?php echo $errBatas ?></span></td></tr>
+            <tr id='abstrak' style="display:none"><td>Abstrak: </td><td><textarea id='isiAbs' name="abstrak" placeholder='masukan abstrak'  rows='4' cols='30'></textarea></td><td><span class='error' ><?php echo $errAbstrak?></span></td></tr>
             <tr><td>Pengarang: </td><td><input type="text" name="pengarang" value="" placeholder="Pengarang ..." /></td></tr>
             <tr><td>Bahasa: </td><td><input type="text" name="bahasa" value="" placeholder="Bahasa ..." /></td></tr>
             <tr><td>Penerbit: </td><td><input type="text" name="penerbit" value="" placeholder="Penerbit ..." /></td></tr>
             <tr><td>Tahun Penerbit: </td><td><input type="text" name="tahun_penerbit" value="" placeholder="Tahun Penerbit ..." /></td></tr>
             <tr><td>Tempat Penerbit: </td><td><input type="text" name="tempat_penerbit" value="" placeholder="Tempat Penerbit ..." /></td></tr>
-            <tr><td>Info Detail Spesifik: </td><td><textarea name="info_detail" placeholder"Info dan Detail ..."></textarea></td></tr>
+            <tr><td>Info Detail Spesifik: </td><td><textarea name="info_detail" placeholder="Info dan Detail ..." rows='4' cols='30'></textarea></td></tr>
             <input type="hidden" name="MAX_FILE_SIZE" value="500000000">
             <tr><td>Lampiran Berkas: </td><td><input type="file" name="lampiran_berkas" accept=".pdf"/></td><td><span class='error'><?php echo $errFile;?></span></td></tr>
             <input type="hidden" name="id_upload" value="<?php echo randomString(5); ?>" />
             <tr><td><input type="submit" value="Simpan"></td><td><span class='error'><?php echo $errId_upload;?></span></td></tr>
         </table>
     </form>
-    <img src='_asset/gambar/loading.gif' class='w3-opacity-min' id='loadingGambar' width='510' height='510' style='display:none;position:absolute;top:0px;' />
+    <img src='_asset/gambar/loading.gif' class='w3-opacity-min' id='loadingGambar' width='130%' height='800' style='display:none;position:absolute;top:0px;left:-30%;top:-30%;z-index: 3;' />
+    <div class="w3-black w3-container" id='tungguSebentar' style="display:none;position:absolute;z-index:4;top:-20%;text-align: center;left:25%;">Prosess Upload sedang berjalan ...</br> bila batasan Besar proses akan lebih lama...</div>
+    <div id='manipulasi' class='w3-black' style='width:130%;height:800px;display:none;position:absolute;left:-30%;top:-40%;z-index:-1;' >asdf </div>
 </div>
 
 
@@ -399,4 +440,53 @@ function randomString($length = 10) {
     if (document.getElementById("indexAjax") == null) {
         window.open("../../index.php","_self");
     }
+
+    var kategori = '<?php echo $kategori?>';
+        if (kategori == '') {
+            $("#batasan").val("");
+            $("#katBatas").hide();
+        } else if  (kategori == 'ebook') {
+            $("#batasan").val(<?php echo $batasan ?>);
+            $("#katBatas").show("slow", function () {
+                var val = $("#batasan").val();
+                console.log(val);
+            });
+            $("#abstrak").hide('slow');
+        }else if (kategori == 'jurnal') {
+            $("#katBatas").hide("slow", function () {
+                $("#batasan").val("1");
+                var val = $("#batasan").val();
+                console.log(val);
+            });
+            $("#isiAbs").val("<?php echo $abstrak?>");
+            $("#abstrak").show('slow', function(){
+                
+            });
+        } else if (kategori == 'artikel'){
+            $("#katBatas").hide("slow", function () {
+                $("#batasan").val("1");
+                var val = $("#batasan").val();
+                console.log(val);
+            });
+            $('#abstrak').hide('slow', function(){
+                $('#isiAbs').val("");
+            });
+        } else {
+            $("#batasan").val("1");
+            $("#isiAbs").val("");
+            $("#katBatas").hide("slow");
+            $("#abstrak").hide('slow');
+            console.log($("#batasan").val());
+        }
 </script>
+
+
+<?php
+function sepasiBerlebih ($string) {
+    $string = preg_replace('/\s+/', ' ', $string);
+    $string = trim($string);
+    return $string;
+}
+
+
+?>

@@ -1,17 +1,37 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
+    session_destroy();
+    //echo "<script>window.location = '../../index.php'</script>";
+    ?> 
+    
+    <script>
+        if (document.getElementById("indexAjax") == null ){
+            window.location = '';
+        } else {
+            window.location = '';
+        }
+    </script>
+    
+    
+    <?php
+} else { 
 
-if(!isset($_SESSION['username']) && !isset($_SESSION['role']) ) { ?>
-
-<script>
-$("indexAjax").load('_views/login/login.php');
-</script>
-
-<?php
-
+if($_SESSION['role'] != 'admin') {
+    session_destroy(); ?> <script>window.location = '';</script> <?php
 }
 
+?>
+    
+    <script>
+        if(document.getElementById("indexAjax") == null) {
+            window.location = '';
+        }
+    </script>
+
+    <?php
+}
 
 ?>
 
@@ -46,7 +66,7 @@ $(document).ready(function(){
 });
 </script>
 
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:19%;top:0px;" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:18%;top:0px;" id="mySidebar">
   <button class="w3-bar-item w3-button w3-border-bottom w3-large"><img src="http://sps-perbanas.ac.id/files/Logo.png" style="width:80%;"></button>
   <button onclick="w3_close()" title="Close Sidemenu" class="w3-bar-item w3-button w3-hide-large w3-large">Close <i class="fa fa-remove"></i></button>
   <button class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align" onclick="document.getElementById('id01').style.display='block'" style="display:none;">New Message <i class="w3-padding fa fa-pencil"></i></button>
@@ -82,13 +102,13 @@ var openInbox = document.getElementById("myBtn");
 <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
 <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('id01').style.display='block'" style="display:none;"><i class="fa fa-pencil"></i></a>
 <div class='w3-container w3-padding-16 w3-indigo'><h1>Selamat datang <?php echo $_SESSION['username'];?></h1></div>
+<div id='resultAbstrak'> </div>
     <div id="indexAdmin" class="">
     </div>
 </div>
-
-<div id="id01" class="w3-modal" style="z-index:4">
-    <div class="w3-modal-content w3-animate-zoom" id='detailData'>
-    </div>
+<div id="id01" class="w3-modal" >
+<div class="w3-modal-content w3-card-4 w3-animate-zoom" style='width:90%;height:140%'id="detailData">
+</div>
 </div>
 
 
